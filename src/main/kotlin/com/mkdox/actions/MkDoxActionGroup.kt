@@ -6,14 +6,20 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.util.IconLoader
 import com.mkdox.services.MkDoxStateService
+import com.mkdox.icons.MkDoxIcons
 
 class MkDoxActionGroup : ActionGroup(), DumbAware {
     private val createAction = MkDoxCreateAction()
     private val serveAction = MkDoxServeAction()
     private val checkAction = MkDoxCheckAction()
 
-    private val activeIcon = IconLoader.getIcon("/icons/mkdoxActive.png", javaClass)
+    private val activeIcon = MkDoxIcons.active
     private val inactiveIcon = IconLoader.getDisabledIcon(activeIcon)
+
+    init {
+        templatePresentation.icon = inactiveIcon
+        templatePresentation.disabledIcon = inactiveIcon
+    }
 
     override fun getChildren(event: AnActionEvent?): Array<AnAction> {
         val project = event?.project ?: return AnAction.EMPTY_ARRAY

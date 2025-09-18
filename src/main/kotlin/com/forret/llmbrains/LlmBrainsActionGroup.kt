@@ -12,7 +12,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         actions += SimpleRunAction("🫴 Gemini CLI")    { project?.let { TerminalCommandRunner.run(it, "🫴 Gemini", "gemini") } }
         actions += SimpleRunAction("🫴 Qodo Command")  { project?.let { TerminalCommandRunner.run(it, "🫴 Qodo", "qodo") } }
         actions += Separator.getInstance()
-        actions += SimpleRunAction("❓ Check what's installed") { project?.let { TerminalCommandRunner.run(it, "❓ Check", buildCheckScript()) } }
+        actions += SimpleRunAction("❓ Check versions") { project?.let { TerminalCommandRunner.run(it, "❓ Check", buildCheckScript()) } }
         return actions.toTypedArray()
     }
 

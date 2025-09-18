@@ -12,7 +12,8 @@ class LlmBrainsCliAction(
 ) : DumbAwareAction(text, description, null) {
 
     override fun update(e: AnActionEvent) {
-        e.presentation.isEnabledAndVisible = e.project != null
+        e.presentation.isVisible = true
+        e.presentation.isEnabled = e.project != null
     }
 
     override fun actionPerformed(e: AnActionEvent) {

@@ -1,9 +1,7 @@
 <idea-plugin>
-    <version>0.0.11</version>
-    <idea-version since-build="233" />
     <id>com.llmbrains.plugin</id>
     <name>LLM Brains</name>
-    <vendor email="peter@forret.com" url="https://github.com/toolstud-io/LlmBrains">LLM Brains</vendor>
+    <vendor email="peter@forret.com" url="https://github.com/pforret">Peter Forret</vendor>
     <description><![CDATA[
         <p>Launch popular CLI coding agents directly from JetBrains IDEs.</p>
         <ul>

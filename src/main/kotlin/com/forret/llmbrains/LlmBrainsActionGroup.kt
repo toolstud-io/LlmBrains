@@ -7,38 +7,24 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
     override fun getChildren(e: AnActionEvent?): Array<AnAction> {
         val project = e?.project
         val actions = mutableListOf<AnAction>()
-        actions += SimpleRunAction("🫴 Claude Code") { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Claude", "claude") } }
-        actions += SimpleRunAction("🫴 Codex CLI")     { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Codex", "codex") } }
-        actions += SimpleRunAction("🫴 Gemini CLI")    { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Gemini", "gemini") } }
-        actions += SimpleRunAction("🫴 Qodo Command")       { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Qodo", "qodo") } }
+        actions += SimpleRunAction("🫴 Claude Code")   { project?.let { TerminalCommandRunner.run(it, "🫴 Claude", "claude") } }
+        actions += SimpleRunAction("🫴 Codex CLI")     { project?.let { TerminalCommandRunner.run(it, "🫴 Codex", "codex") } }
+        actions += SimpleRunAction("🫴 Gemini CLI")    { project?.let { TerminalCommandRunner.run(it, "🫴 Gemini", "gemini") } }
+        actions += SimpleRunAction("🫴 Qodo Command")  { project?.let { TerminalCommandRunner.run(it, "🫴 Qodo", "qodo") } }
         actions += Separator.getInstance()
         actions += SimpleRunAction("❓ Check what's installed") { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Check", buildCheckScript()) } }
         return actions.toTypedArray()
     }
 
     private fun buildCheckScript(): String {
-        // Compact bash script to check presence and versions.
-        // NOTE: We must escape all "$" occurrences inside the Kotlin string using ${'$'} to avoid template interpolation.
         val script = """
             bash -lc '
-            check() {
-              name="${'$'}1"; cmd="${'$'}2"; verFlag="${'$'}3"; install="${'$'}4";
-              if command -v "${'$'}cmd" >/dev/null 2>&1; then
-                if [ -n "${'$'}verFlag" ]; then
-                  echo "✅  ${'$'}name installed: ${'$'}( ${'$'}cmd ${'$'}verFlag 2>/dev/null | head -n 1 )"
-                else
-                  echo "✅  ${'$'}name installed: ${'$'}cmd"
-                fi
-              else
-                echo "❌  ${'$'}name not found. Install: ${'$'}install"
-              fi
-            }
             clear
             echo "Checking CLI coding agents..."; echo
-            check "Claude" "claude" "--version" "npm install -g @anthropic-ai/claude-code";
-            check "Codex" "codex" "--version" "npm install -g @openai/codex";
-            check "Gemini" "gemini" "--version" "npm install -g @google/gemini-cli";
-            check "Qodo" "qodo" "--version | grep Client" "npm install -g @qodo/command";
+            ./check_version.sh "Claude Code" "claude" "--version" "npm install -g @anthropic-ai/claude-code"
+            ./check_version.sh "Codex CLI" "codex" "--version" "npm install -g @openai/codex"
+            ./check_version.sh "Gemini CLI" "gemini" "--version" "npm install -g @google/gemini-cli"
+            ./check_version.sh "Qodo Command" "qodo" "--version | grep Client" "npm install -g @qodo/command"
             echo
             '
         """.trimIndent()

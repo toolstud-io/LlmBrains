@@ -1,9 +1,11 @@
   # Repository Guidelines
 
   ## Project Structure & Module Organization
-  This plugin repository targets JetBrains IDEs and follows the Gradle IntelliJ plugin layout. Place production Kotlin sources in `src/main/kotlin`, organised by feature packages (for example,
-  `com.mkdox.actions`). Shared assets such as icons live under `src/main/resources/icons`, while plugin metadata is in `src/main/resources/META-INF/plugin.xml`. Keep samples or docs in `docs/` and
-  automation scripts in the repo root. When adding long-running helpers, prefer wrapping them in `mkdox.sh` so the IDE action can call them consistently.
+  This plugin repository targets JetBrains IDEs and follows the Gradle IntelliJ plugin layout. 
+  Place production Kotlin sources in `src/main/kotlin`, organised by feature packages (for example, `com.mkdox.actions`). 
+  Shared assets such as icons live under `src/main/resources/icons`, while plugin metadata is in `src/main/resources/META-INF/plugin.xml`. 
+  Keep samples or docs in `docs/` and automation scripts in the repo root. 
+  When adding long-running helpers, prefer wrapping them in `mkdox.sh` so the IDE action can call them consistently.
 
   ## Build, Test, and Development Commands
   Use the Gradle wrapper once added to the project root. `./gradlew build` compiles the plugin and runs verification tasks. `./gradlew runIde` launches a sandbox IDE with the mkdox button installed;

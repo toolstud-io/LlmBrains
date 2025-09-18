@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.example"
-version = "0.1.0"
+version = file("VERSION.md").readText().trim()
 
 defaultTasks("build")
 

@@ -12,11 +12,11 @@
     <depends>org.jetbrains.plugins.terminal</depends>
 
     <actions>
-        <!-- Popup action with 🫴 icon/text in the right side of the main toolbar -->
-        <action id="com.example.llmbrains.Popup" class="com.example.llmbrains.LlmBrainsPopupAction"
-                text="LLM Brains" description="Open any CLI coding agent in a new terminal window.">
+        <!-- Dropdown action group with 🫴 text in the right side of the main toolbar -->
+        <group id="com.example.llmbrains.Dropdown" class="com.example.llmbrains.LlmBrainsActionGroup"
+               text="🫴" description="Open any CLI coding agent in a new terminal window." popup="true">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
             <keyboard-shortcut keymap="Default" first-keystroke="ctrl alt L"/>
-        </action>
+        </group>
     </actions>
 </idea-plugin>

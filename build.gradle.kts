@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.intellij") version "1.17.3"
 }
 
-group = "com.mkdox"
+group = "com.llmbrains"
 version = file("VERSION.md").readText().trim()
 
 repositories {
@@ -45,6 +45,7 @@ dependencies {
     testImplementation(kotlin("stdlib"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    testImplementation("io.mockk:mockk:1.13.11")
 }
 
 java {

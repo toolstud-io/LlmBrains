@@ -1,5 +1,7 @@
 .env
-.idea/
 /.cache/
-.gradle/
-build/
+/.gradle/
+/.idea/
+/.temp/
+/build/
+/temp/

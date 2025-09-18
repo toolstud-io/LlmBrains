@@ -34,5 +34,5 @@ For documentation checks, run `mkdox serve` from the project root to spin up the
   Request review from another agent before merging to keep plugin behaviour predictable.
 
   ## Agent Execution Tips
-  When automating tasks, prefer Gradle and mkdox CLIs over bespoke scripts, and document any new automation in `README.md` so future maintainers understand the workflow.
+  When automating tasks, prefer Gradle CLIs over bespoke scripts, and document any new automation in `README.md` so future maintainers understand the workflow.
 

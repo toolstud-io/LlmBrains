@@ -1,0 +1,27 @@
+<idea-plugin>
+    <id>com.llmbrains.plugin</id>
+    <name>LLM Brains</name>
+    <vendor email="hi@llmbrains.dev" url="https://github.com/toolstud-io/LlmBrains">LLM Brains</vendor>
+    <icon>icons/llmbrains.svg</icon>
+
+    <description><![CDATA[
+        <p>Launch popular CLI coding agents directly from JetBrains IDEs.</p>
+        <ul>
+            <li>Open Claude, Codex, or Gemini CLIs in fresh terminal tabs with a single click.</li>
+            <li>Run a diagnostic helper to confirm which CLIs are available and learn how to install them.</li>
+        </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
+
+    <actions>
+        <group
+            id="com.llmbrains.actions.LlmBrainsAgentsGroup"
+            class="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
+            popup="true">
+            <add-to-group group-id="MainToolbarRight" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>

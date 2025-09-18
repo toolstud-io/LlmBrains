@@ -21,8 +21,6 @@
                 id="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
                 class="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
                 text="LLM Brains"
-                description="Open any CLI coding agent in a new terminal window."
-                icon="icons/llmbrains.svg"
                 popup="true">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
         </group>

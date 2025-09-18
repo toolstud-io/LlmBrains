@@ -1,12 +1,12 @@
 package com.forret.llmbrains
 
 import com.intellij.openapi.project.Project
-import org.jetbrains.plugins.terminal.TerminalView
+import org.jetbrains.plugins.terminal.TerminalToolWindowManager
 
 object TerminalCommandRunner {
     fun run(project: Project, title: String, command: String) {
-        val terminalView = TerminalView.getInstance(project)
-        val widget = terminalView.createLocalShellWidget(project.basePath ?: "", title)
+        val terminalManager = TerminalToolWindowManager.getInstance(project)
+        val widget = terminalManager.createLocalShellWidget(project.basePath ?: "", title)
         widget.executeCommand(command)
     }
 }

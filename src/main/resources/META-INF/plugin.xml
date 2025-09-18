@@ -23,7 +23,6 @@
             icon="icons/llmbrains.svg"
             popup="true">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
     </actions>
 </idea-plugin>

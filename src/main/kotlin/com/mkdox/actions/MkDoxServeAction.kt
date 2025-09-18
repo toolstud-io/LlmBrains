@@ -5,13 +5,13 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
+import org.jetbrains.plugins.terminal.TerminalToolWindowManager
 import com.mkdox.services.DockerService
 import com.mkdox.services.MkDoxCommandExecutor
 import com.mkdox.services.MkDoxNotifier
 import com.mkdox.services.MkDoxStateService
 import java.nio.file.Path
 import java.nio.file.Paths
-import org.jetbrains.plugins.terminal.TerminalView
 
 class MkDoxServeAction : AnAction("Serve mkdox"), DumbAware {
     override fun actionPerformed(event: AnActionEvent) {
@@ -47,9 +47,9 @@ class MkDoxServeAction : AnAction("Serve mkdox"), DumbAware {
 
     private fun launchTerminal(project: Project, basePath: Path, command: String): Boolean =
         try {
-            val terminalView = TerminalView.getInstance(project)
-            val widget = terminalView.createLocalShellWidget(basePath.toString(), "mkdox")
+            val manager = TerminalToolWindowManager.getInstance(project)
             ApplicationManager.getApplication().invokeLater {
+                val widget = manager.createLocalShellWidget(basePath.toString(), "mkdox")
                 widget.executeCommand(command)
             }
             true

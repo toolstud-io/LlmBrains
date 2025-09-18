@@ -2,12 +2,13 @@
     <id>com.mkdox.button</id>
     <name>MkDox Button</name>
     <vendor email="support@mkdox.com" url="https://github.com/pforret/mkdox">mkdox</vendor>
+    <icon>icons/pluginIcon.png</icon>
     <description><![CDATA[
         Adds a toolbar action for running mkdox flows inside JetBrains IDEs.
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.terminal</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
 
 
     <extensions defaultExtensionNs="com.intellij">

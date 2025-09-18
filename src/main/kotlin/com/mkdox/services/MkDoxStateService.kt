@@ -8,6 +8,7 @@ object MkDoxStateService {
     data class State(
         val hasDocsDirectory: Boolean,
         val hasMkdocsFile: Boolean,
+        val hasBlogDirectory: Boolean,
         val hasScript: Boolean,
     ) {
         val isReady: Boolean = hasDocsDirectory && hasMkdocsFile && hasScript
@@ -17,11 +18,12 @@ object MkDoxStateService {
         stateForPath(project.basePath?.let(Path::of))
 
     fun stateForPath(basePath: Path?): State {
-        if (basePath == null) return State(false, false, false)
+        if (basePath == null) return State(false, false, false, false)
         val docsDir = Files.isDirectory(basePath.resolve("docs"))
         val mkdocsFile = hasMkdocsFile(basePath)
+        val blogDir = Files.isDirectory(basePath.resolve("docs/blog"))
         val script = isExecutable(basePath.resolve("mkdox.sh"))
-        return State(docsDir, mkdocsFile, script)
+        return State(docsDir, mkdocsFile, blogDir, script)
     }
 
     private fun hasMkdocsFile(basePath: Path): Boolean =

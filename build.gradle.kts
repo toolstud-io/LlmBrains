@@ -14,7 +14,7 @@ repositories {
 
 intellij {
     version.set("2023.3")
-    plugins.set(listOf("com.intellij.terminal"))
+    plugins.set(listOf("org.jetbrains.plugins.terminal"))
 }
 
 tasks {
@@ -40,7 +40,9 @@ tasks {
 }
 
 dependencies {
+    compileOnly(kotlin("stdlib"))
     testImplementation(kotlin("test"))
+    testImplementation(kotlin("stdlib"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
 }

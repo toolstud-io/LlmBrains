@@ -10,6 +10,7 @@ import com.mkdox.services.MkDoxStateService
 class MkDoxActionGroup : ActionGroup(), DumbAware {
     private val createAction = MkDoxCreateAction()
     private val serveAction = MkDoxServeAction()
+    private val checkAction = MkDoxCheckAction()
 
     private val activeIcon = IconLoader.getIcon("/icons/mkdoxActive.png", javaClass)
     private val inactiveIcon = IconLoader.getDisabledIcon(activeIcon)
@@ -18,9 +19,9 @@ class MkDoxActionGroup : ActionGroup(), DumbAware {
         val project = event?.project ?: return AnAction.EMPTY_ARRAY
         val state = MkDoxStateService.projectState(project)
         return if (state.isReady) {
-            arrayOf<AnAction>(serveAction)
+            arrayOf<AnAction>(checkAction, serveAction)
         } else {
-            arrayOf<AnAction>(createAction)
+            arrayOf<AnAction>(checkAction, createAction)
         }
     }
 
@@ -46,6 +47,7 @@ class MkDoxActionGroup : ActionGroup(), DumbAware {
             when {
                 !hasMkdocsFile -> "Missing mkdocs.yml in project root"
                 !hasDocsDirectory -> "Missing docs/ directory"
+                !hasBlogDirectory -> "Missing docs/blog directory"
                 !hasScript -> "Missing mkdox.sh script"
                 else -> "mkdox prerequisites incomplete"
             }

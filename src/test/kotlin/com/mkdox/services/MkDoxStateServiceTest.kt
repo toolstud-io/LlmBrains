@@ -18,6 +18,7 @@ class MkDoxStateServiceTest {
     fun shouldDetectReadyStateWhenAllArtifactsExist() {
         val docsDir = tempDir.resolve("docs")
         docsDir.createDirectories()
+        docsDir.resolve("blog").createDirectories()
         tempDir.resolve("mkdocs.yml").writeText("site_name: test")
         val script = tempDir.resolve("mkdox.sh")
         Files.writeString(script, "#!/bin/sh\nexit 0\n")
@@ -27,6 +28,7 @@ class MkDoxStateServiceTest {
 
         assertTrue(state.hasDocsDirectory)
         assertTrue(state.hasMkdocsFile)
+        assertTrue(state.hasBlogDirectory)
         assertTrue(state.hasScript)
         assertTrue(state.isReady)
     }
@@ -37,6 +39,7 @@ class MkDoxStateServiceTest {
 
         assertFalse(state.hasDocsDirectory)
         assertFalse(state.hasMkdocsFile)
+        assertFalse(state.hasBlogDirectory)
         assertFalse(state.hasScript)
         assertFalse(state.isReady)
     }

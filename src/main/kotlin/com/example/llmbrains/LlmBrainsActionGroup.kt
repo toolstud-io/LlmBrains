@@ -3,21 +3,21 @@ package com.example.llmbrains
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.project.DumbAware
 
-class LlmBrainsActionGroup : ActionGroup("\uD83E\uDEC4", "Open any CLI coding agent in a new terminal window.", null), DumbAware {
+class LlmBrainsActionGroup : ActionGroup("LLM", "Open any CLI coding agent in a new terminal window.", null), DumbAware {
     override fun getChildren(e: AnActionEvent?): Array<AnAction> {
         val project = e?.project
         val actions = mutableListOf<AnAction>()
-        actions += SimpleRunAction("Claude (Anthropic)") {
+        actions += SimpleRunAction("🫴 Claude (Anthropic)") {
             project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Claude", "claude") }
         }
-        actions += SimpleRunAction("Codex (OpenAI)") {
+        actions += SimpleRunAction("🫴 Codex (OpenAI)") {
             project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Codex", "codex") }
         }
-        actions += SimpleRunAction("Gemini (Google)") {
+        actions += SimpleRunAction("🫴 Gemini (Google)") {
             project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Gemini", "gemini") }
         }
         actions += Separator.getInstance()
-        actions += SimpleRunAction("Check what's installed") {
+        actions += SimpleRunAction("🫴 Check what's installed") {
             project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Check", buildCheckScript()) }
         }
         return actions.toTypedArray()
@@ -40,10 +40,11 @@ class LlmBrainsActionGroup : ActionGroup("\uD83E\uDEC4", "Open any CLI coding ag
                 echo "❌ ${'$'}name not found. Install: ${'$'}install"
               fi
             }
+            clear
             echo "Checking CLI coding agents..."; echo
-            check "Claude" "claude" "--version" "https://docs.anthropic.com/claude/docs/claude-code";
-            check "Codex" "codex" "--version" "https://platform.openai.com";
-            check "Gemini" "gemini" "--version" "https://ai.google.dev/gemini-api/docs";
+            check "Claude" "claude" "--version" "npm install -g @anthropic-ai/claude-code";
+            check "Codex" "codex" "--version" "npm install -g @openai/codex";
+            check "Gemini" "gemini" "--version" "npm install -g @google/gemini-cli";
             echo
             '
         """.trimIndent()

@@ -1,55 +1,54 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "1.9.25"
     id("org.jetbrains.intellij") version "1.17.3"
 }
 
-group = "com.llmbrains"
-version = file("VERSION.md").readText().trim()
+group = "com.example"
+version = "0.1.0"
+
+defaultTasks("build")
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    version.set("2023.3")
+    // Use a modern IntelliJ Platform build so the Terminal API is available.
+    version.set("2024.1")
+    // Only require the built-in Terminal plugin; avoid Java plugin so PhpStorm is supported.
     plugins.set(listOf("org.jetbrains.plugins.terminal"))
 }
 
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "17"
-            freeCompilerArgs = freeCompilerArgs + listOf("-Xjvm-default=all")
-        }
-    }
-
-    patchPluginXml {
-        sinceBuild.set("233")
-        untilBuild.set("")
-    }
-
-    test {
-        useJUnitPlatform()
-    }
-
-    runPluginVerifier {
-        ideVersions.set(listOf("IC-2023.3"))
-    }
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
+    // Use IntelliJ Platform's Kotlin stdlib; don't bundle our own
     compileOnly(kotlin("stdlib"))
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-    testImplementation("io.mockk:mockk:1.13.11")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+tasks {
+    patchPluginXml {
+        sinceBuild.set("241")
+        // Allow running on 2025.2 (build 252.*) and later minor updates
+        untilBuild.set("252.*")
+        pluginDescription.set(
+            """
+            LLM Brains: open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.
+            Adds a toolbar button (🫴) with options and a check to see what is installed.
+            """.trimIndent()
+        )
+        changeNotes.set("Initial version.")
+    }
+
+    // Ensure `./gradlew build` also produces the plugin ZIP
+    named("build") {
+        dependsOn("buildPlugin")
+    }
+
+    runIde {
+        // Optionally point to a specific IDE install
+        // ideDir.set(file("/Applications/PhpStorm.app/Contents"))
     }
 }

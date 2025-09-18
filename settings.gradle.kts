@@ -1,1 +1,1 @@
-rootProject.name = "LlmBrains"
+rootProject.name = "llm-brains"

@@ -1,28 +1,22 @@
 <idea-plugin>
-    <id>com.llmbrains.plugin</id>
+    <id>com.example.llmbrains</id>
     <name>LLM Brains</name>
-    <vendor email="peter@forret.com" url="https://github.com/pforret">Peter Forret</vendor>
-    <description><![CDATA[
-        <p>Launch popular CLI coding agents directly from JetBrains IDEs.</p>
-        <ul>
-            <li>Open Claude, Codex, or Gemini CLIs in fresh terminal tabs with a single click.</li>
-            <li>Run a diagnostic helper to confirm which CLIs are available and learn how to install them.</li>
-        </ul>
-    ]]></description>
+    <vendor email="you@example.com">Your Name</vendor>
+    <version>0.1.0</version>
+
+    <description>
+        Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.
+    </description>
+
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
-    <extensions defaultExtensionNs="com.intellij">
-        <notificationGroup id="LlmBrains" displayType="BALLOON" isLogBased="false"/>
-    </extensions>
+
     <actions>
-        <group
-                id="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
-                class="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
-                text="LLM Brains"
-                icon="/icons/llmbrains.svg"
-                popup="true">
+        <!-- Popup action with 🫴 icon/text in the right side of the main toolbar -->
+        <action id="com.example.llmbrains.Popup" class="com.example.llmbrains.LlmBrainsPopupAction"
+                text="LLM Brains" description="Open any CLI coding agent in a new terminal window.">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </group>
+            <keyboard-shortcut keymap="Default" first-keystroke="ctrl alt L"/>
+        </action>
     </actions>
 </idea-plugin>

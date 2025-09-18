@@ -8,11 +8,11 @@ class LlmBrainsPopupAction : AnAction("🫴", "Open any CLI coding agent in a ne
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
         val popupGroup = DefaultActionGroup().apply {
-            add(SimpleRunAction("Claude (Anthropic)") { TerminalHelpers.openAndRun(project, "🫴 Claude", "claude") })
-            add(SimpleRunAction("Codex (OpenAI)") { TerminalHelpers.openAndRun(project, "🫴 Codex", "codex") })
-            add(SimpleRunAction("Gemini (Google)") { TerminalHelpers.openAndRun(project, "🫴 Gemini", "gemini") })
+            add(SimpleRunAction("🫴 Claude Code (Anthropic)") { TerminalHelpers.openAndRun(project, "🫴 Claude", "claude") })
+            add(SimpleRunAction("🫴 Codex CLI (OpenAI)") { TerminalHelpers.openAndRun(project, "🫴 Codex", "codex") })
+            add(SimpleRunAction("🫴 Gemini CLI (Google)") { TerminalHelpers.openAndRun(project, "🫴 Gemini", "gemini") })
             addSeparator()
-            add(SimpleRunAction("Check what's installed") {
+            add(SimpleRunAction("❓ Check what's installed") {
                 TerminalHelpers.openAndRun(project, "🫴 Check", buildCheckScript())
             })
         }
@@ -33,8 +33,27 @@ class LlmBrainsPopupAction : AnAction("🫴", "Open any CLI coding agent in a ne
         // NOTE: We must escape all "$" occurrences inside the Kotlin string using ${'$'} to avoid template interpolation.
         val script = """
             bash -lc '
+            clear
+            # Print a colored title
+            echo "Checking CLI coding agents..."; echo
+
+            # Helper: show Installation section from docs/agents/*.md if available
+            show_install() {
+              doc_path="${'$'}1"
+              if [ -f "${'$'}doc_path" ]; then
+                echo
+                echo "📘 Installation instructions from ${'$'}doc_path:"; echo
+                # Extract lines from "## Installation" up to the next "##" header (or end of file)
+                awk 'found{if($0 ~ /^## / && !first){exit} print} /^## Installation/{found=1; first=0}' "${'$'}doc_path"
+                echo
+              else
+                echo "(Documentation not found at ${'$'}doc_path)"
+              fi
+            }
+
+            # Checker: verifies command and prints version or install instructions
             check() {
-              name="${'$'}1"; cmd="${'$'}2"; verFlag="${'$'}3"; install="${'$'}4";
+              name="${'$'}1"; cmd="${'$'}2"; verFlag="${'$'}3"; doc="${'$'}4";
               if command -v "${'$'}cmd" >/dev/null 2>&1; then
                 if [ -n "${'$'}verFlag" ]; then
                   echo "✅ ${'$'}name installed: ${'$'}( ${'$'}cmd ${'$'}verFlag 2>/dev/null | head -n 1 )"
@@ -42,13 +61,15 @@ class LlmBrainsPopupAction : AnAction("🫴", "Open any CLI coding agent in a ne
                   echo "✅ ${'$'}name installed: ${'$'}cmd"
                 fi
               else
-                echo "❌ ${'$'}name not found. Install: ${'$'}install"
+                echo "❌ ${'$'}name not found. See installation instructions below:"
+                show_install "${'$'}doc"
               fi
             }
-            echo "Checking CLI coding agents..."; echo
-            check "Claude" "claude" "--version" "https://docs.anthropic.com/claude/docs/claude-code";
-            check "Codex" "codex" "--version" "https://platform.openai.com";
-            check "Gemini" "gemini" "--version" "https://ai.google.dev/gemini-api/docs";
+
+            # Perform checks with local docs references
+            check "Claude" "claude" "-v" "docs/agents/claude.md";
+            check "Codex" "codex" "-V" "docs/agents/codex.md";
+            check "Gemini" "gemini" "-v" "docs/agents/gemini.md";
             echo
             '
         """.trimIndent()

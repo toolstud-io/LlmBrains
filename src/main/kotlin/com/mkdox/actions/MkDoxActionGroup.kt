@@ -48,7 +48,7 @@ class MkDoxActionGroup : ActionGroup(), DumbAware {
                 !hasMkdocsFile -> "Missing mkdocs.yml in project root"
                 !hasDocsDirectory -> "Missing docs/ directory"
                 !hasBlogDirectory -> "Missing docs/blog directory"
-                !hasScript -> "Missing mkdox.sh script"
+                !hasScript -> "mkdox.sh not found on PATH"
                 else -> "mkdox prerequisites incomplete"
             }
         }

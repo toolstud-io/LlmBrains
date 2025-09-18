@@ -29,7 +29,7 @@ class MkDoxServeAction : AnAction("Serve mkdox"), DumbAware {
             return
         }
 
-        val command = serveCommand(basePath)
+        val command = serveCommand(state)
         if (!launchTerminal(project, basePath, command)) {
             val result = MkDoxCommandExecutor.execute(command, basePath)
             if (result.success) {
@@ -40,10 +40,8 @@ class MkDoxServeAction : AnAction("Serve mkdox"), DumbAware {
         }
     }
 
-    private fun serveCommand(basePath: Path): String {
-        val script = basePath.resolve("mkdox.sh")
-        return if (java.nio.file.Files.isExecutable(script)) "./mkdox.sh serve" else "mkdox serve"
-    }
+    private fun serveCommand(state: MkDoxStateService.State): String =
+        if (state.hasScript) "mkdox.sh serve" else "mkdox serve"
 
     private fun launchTerminal(project: Project, basePath: Path, command: String): Boolean =
         try {

@@ -1,10 +1,9 @@
 package com.mkdox.services
 
-import com.mkdox.services.MkDoxStateService
-import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
 import kotlin.io.path.writeText
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -14,15 +13,23 @@ class MkDoxStateServiceTest {
     @TempDir
     lateinit var tempDir: Path
 
+    @AfterEach
+    fun tearDown() {
+        MkDoxStateService.pathOverrideForWhich = null
+    }
+
     @Test
     fun shouldDetectReadyStateWhenAllArtifactsExist() {
         val docsDir = tempDir.resolve("docs")
         docsDir.createDirectories()
         docsDir.resolve("blog").createDirectories()
         tempDir.resolve("mkdocs.yml").writeText("site_name: test")
-        val script = tempDir.resolve("mkdox.sh")
-        Files.writeString(script, "#!/bin/sh\nexit 0\n")
+        val scriptsDir = tempDir.resolve("bin")
+        scriptsDir.createDirectories()
+        val script = scriptsDir.resolve("mkdox.sh")
+        script.writeText("#!/bin/sh\nexit 0\n")
         script.toFile().setExecutable(true)
+        MkDoxStateService.pathOverrideForWhich = scriptsDir.toString()
 
         val state = MkDoxStateService.stateForPath(tempDir)
 

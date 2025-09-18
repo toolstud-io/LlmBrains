@@ -19,6 +19,7 @@
                 id="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
                 class="com.llmbrains.actions.LlmBrainsAgentsActionGroup"
                 text="LLM Brains"
+                icon="/icons/llmbrains.svg"
                 popup="true">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
         </group>

@@ -5,6 +5,8 @@
 ```shell
 # Install with npm
 npm install -g @openai/codex
+# update to latest version with npm
+npm update -g @openai/codex
 
 # Install with Homebrew
 brew install codex

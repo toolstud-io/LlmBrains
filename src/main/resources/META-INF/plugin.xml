@@ -2,7 +2,6 @@
     <id>com.llmbrains.plugin</id>
     <name>LLM Brains</name>
     <vendor email="hi@llmbrains.dev" url="https://github.com/toolstud-io/LlmBrains">LLM Brains</vendor>
-    <icon>icons/llmbrains.svg</icon>
 
     <description><![CDATA[
         <p>Launch popular CLI coding agents directly from JetBrains IDEs.</p>

@@ -68,7 +68,4 @@ plugins:
         as_creation: date
         as_update: date
 
-copyright: "&copy; 2025 JetBrains mkdox button &bull; pforret"
-
-extra:
-  generator: false
+copyright: "&copy; 2025 LLM Brains &bull; pforret"

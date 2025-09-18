@@ -5,8 +5,10 @@
 ```shell
 # Install with npm
 npm install -g @google/gemini-cli
+# update to latest version with npm
+npm update -g @google/gemini-cli
 
-# Install with Homebrew
+# Install with Homebrew (only macOS)
 brew install gemini-cli
 ```
 

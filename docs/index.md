@@ -36,4 +36,8 @@ Environment knobs:
 Docker must be running locally for the wrapper to work.
 
 
-> Developed in Kotlin with OpenAI Codex
+## Development remarks
+
+This plugin was developed in Kotlin with OpenAI Codex CLI. 
+
+![Developed in Kotlin with OpenAI Codex CLI](https://img.shields.io/badge/Developed_with-🫴_Codex_CLI-orange)

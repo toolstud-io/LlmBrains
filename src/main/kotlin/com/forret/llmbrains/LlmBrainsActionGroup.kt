@@ -1,4 +1,4 @@
-package com.example.llmbrains
+package com.forret.llmbrains
 
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.project.DumbAware

@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>com.example.llmbrains</id>
+    <id>com.forret.llmbrains</id>
     <name>LLM Brains</name>
-    <vendor email="you@example.com">Your Name</vendor>
+    <vendor email="peter@forret.com">Peter Forret</vendor>
     <version>0.1.0</version>
 
     <icon>palm-up-hand-noto.svg</icon>
@@ -14,8 +14,7 @@
     <depends>org.jetbrains.plugins.terminal</depends>
 
     <actions>
-        <!-- Dropdown action group with 🫴 text in the right side of the main toolbar -->
-        <group id="com.example.llmbrains.Dropdown" class="com.example.llmbrains.LlmBrainsActionGroup"
+        <group id="com.forret.llmbrains.Dropdown" class="com.forret.llmbrains.LlmBrainsActionGroup"
                text="🫴" description="Open any CLI coding agent in a new terminal window." popup="true"
                icon="palm-up-hand-noto.svg">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>

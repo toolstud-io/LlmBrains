@@ -38,7 +38,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             check "Claude" "claude" "--version" "npm install -g @anthropic-ai/claude-code";
             check "Codex" "codex" "--version" "npm install -g @openai/codex";
             check "Gemini" "gemini" "--version" "npm install -g @google/gemini-cli";
-            check "Qodo" "qodo" "--version" "npm install -g @qodo/command";
+            check "Qodo" "qodo" "--version | grep Client" "npm install -g @qodo/command";
             echo
             '
         """.trimIndent()

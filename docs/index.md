@@ -1,27 +1,17 @@
-# JetBrains mkdox button
+# LLM Brains
 
-JetBrains plugin (for e.g. usage in PhpStorm) where there's a specific [pforret/mkdox](https://github.com/pforret/mkdox) functionality button in the top right corner of the editor, right next to the Claude Code button.
+"LLM Brains" is a JetBrains IDE plugin (for e.g. usage in PhpStorm) to open any (popular) CLI coding agent in a new terminal window.
+It's like the Claude Code button but also provides OpenAI Codex and Google's Gemini CLI, and maybe more in the future.
 
-The icon should be ![like this](icon/mkdox-button.png) (or similar).
+It shows this icon in the top right corner of the IDE: 🫴. Mouseover text: "Open any CLI coding agent in a new terminal window."
 
-* there always is the option 'Check mkdox'. This show a list of checkboxes:
-    - is there a /docs in the repo Y/N
-    - is there a /mkdocs.yml file in the root Y/N
-    - is there a /docs/blog folder in the repo Y/N
-    - is Docker running Y/N
-* if there is no `/docs` folder OR no `/mkdocs.yml` file
-    - the icon is inactive (light gray)
-    - when the mouse moves over the icon, you can select 'Create mkdox' 
-    - if Docker is running, 
-        - this executes `mkdox -E "$(basename $root_folder)" new .` and 
-        - opens `/.mkdocs.yml` file in editor
-    - otherwise, it just warns that Docker should be running
-* if there is a `/docs` folder in the project AND there is a `/mkdocs.yml` file in the root AND there is a `/docs/blog` directory
-    - then the icon become active (bright light blue color)
-    - when the mouse pointer moves over it, there is an option 'Serve mkdox' => this tries `mkdox.sh serve` when available and otherwise executes `mkdox serve` in the root folder
-    - if Docker is running,
-        - this executes `mkdox serve` in a new terminal window
-    - otherwise, it just warns that Docker should be running
+when you click on that icon, gives you the following options:
+
+* "Claude (Anthropic)" ⇒ run 'claude' in an IDE terminal window with title '🫴 Claude'
+* "Codex (OpenAI)" ⇒ run 'codex' in an IDE terminal window with title '🫴 Codex'
+* "Gemini (Google)" ⇒ run 'gemini' in an IDE terminal window with title '🫴 Gemini'
+* "Check what's installed" ⇒ run a bash script in an IDE terminal window: for each of the CLI programs above: if it's installed, show the version. If it's not, show how to install it.
+
 
 ## Docker-backed Gradle
 
@@ -44,3 +34,6 @@ Environment knobs:
 - Set `GRADLE_DOCKER_PRESERVE_OWNERSHIP=0` if you prefer the container defaults for file ownership.
 
 Docker must be running locally for the wrapper to work.
+
+
+> Developed in Kotlin with OpenAI Codex

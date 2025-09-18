@@ -4,8 +4,6 @@
     <vendor email="peter@forret.com">Peter Forret</vendor>
     <version>0.1.0</version>
 
-    <icon>palm-up-hand-noto.svg</icon>
-
     <description>
         Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.
     </description>
@@ -16,9 +14,8 @@
     <actions>
         <group id="com.forret.llmbrains.Dropdown" class="com.forret.llmbrains.LlmBrainsActionGroup"
                text="🫴" description="Open any CLI coding agent in a new terminal window." popup="true"
-               icon="palm-up-hand-noto.svg">
+               icon="/icons/palm-up-hand-noto.svg">
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
-            <keyboard-shortcut keymap="Default" first-keystroke="ctrl alt L"/>
         </group>
     </actions>
 </idea-plugin>

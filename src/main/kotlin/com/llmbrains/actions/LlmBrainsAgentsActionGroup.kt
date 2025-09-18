@@ -10,8 +10,9 @@ class LlmBrainsAgentsActionGroup : ActionGroup(), DumbAware {
     override fun getChildren(e: AnActionEvent?): Array<AnAction> = ACTIONS
 
     override fun update(e: AnActionEvent) {
-        e.presentation.isVisible = true
-        e.presentation.isEnabled = e.project != null
+        val hasProject = e.project != null
+        e.presentation.isVisible = hasProject
+        e.presentation.isEnabled = hasProject
     }
 
     override fun isPopup(): Boolean = true

@@ -21,19 +21,17 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             bash -lc '
             function check_version() {
                 if command -v $2 &> /dev/null; then
-                    echo "$1 is installed: $($2 $3 2>&1)"
+                    echo "- $1 is installed: $($2 $3 2>&1)"
                 else
-                    echo "$1 is NOT installed. You can install it with: $4"
+                    echo "! $1 is NOT installed. You can install it with: $4"
                 fi
             }
             clear
             echo "Checking CLI coding agents..."; echo
-            check_version "Claude Code" "claude" "--version" "npm install -g @anthropic-ai/claude-code"
-            check_version "Codex CLI" "codex" "--version" "npm install -g @openai/codex"
-            check_version "Gemini CLI" "gemini" "--version" "npm install -g @google/gemini-cli"
-            check_version "Qodo Command" "qodo" "--version | grep Client" "npm install -g @qodo/command"
-            sleep 30
-            exit 0
+            check_version "Claude Code"  "claude" "--version" "npm install -g @anthropic-ai/claude-code"
+            check_version "Codex CLI"    "codex"  "--version" "npm install -g @openai/codex"
+            check_version "Gemini CLI"   "gemini" "--version" "npm install -g @google/gemini-cli"
+            check_version "Qodo Command" "qodo"   "--version" "npm install -g @qodo/command"
             '
         """.trimIndent()
         return script

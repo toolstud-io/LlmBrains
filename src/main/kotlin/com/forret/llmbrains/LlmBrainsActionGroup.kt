@@ -20,6 +20,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         val script = """
             bash -lc '
             clear
+            pwd
             echo "Checking CLI coding agents..."; echo
             ./check_version.sh "Claude Code" "claude" "--version" "npm install -g @anthropic-ai/claude-code"
             ./check_version.sh "Codex CLI" "codex" "--version" "npm install -g @openai/codex"

@@ -7,12 +7,12 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
     override fun getChildren(e: AnActionEvent?): Array<AnAction> {
         val project = e?.project
         val actions = mutableListOf<AnAction>()
-        actions += SimpleRunAction("🫴 Claude (Anthropic)") { project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Claude", "claude") } }
-        actions += SimpleRunAction("🫴 Codex (OpenAI)")     { project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Codex", "codex") } }
-        actions += SimpleRunAction("🫴 Gemini (Google)")    { project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Gemini", "gemini") } }
-        actions += SimpleRunAction("🫴 Qodo Command")       { project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Qodo", "qodo") } }
+        actions += SimpleRunAction("🫴 Claude (Anthropic)") { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Claude", "claude") } }
+        actions += SimpleRunAction("🫴 Codex (OpenAI)")     { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Codex", "codex") } }
+        actions += SimpleRunAction("🫴 Gemini (Google)")    { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Gemini", "gemini") } }
+        actions += SimpleRunAction("🫴 Qodo Command")       { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Qodo", "qodo") } }
         actions += Separator.getInstance()
-        actions += SimpleRunAction("❓ Check what's installed") { project?.let { TerminalHelpers.openAndRun(it, "\uD83E\uDEC4 Check", buildCheckScript()) } }
+        actions += SimpleRunAction("❓ Check what's installed") { project?.let { TerminalCommandRunner.run(it, "\uD83E\uDEC4 Check", buildCheckScript()) } }
         return actions.toTypedArray()
     }
 

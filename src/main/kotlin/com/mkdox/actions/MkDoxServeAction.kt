@@ -29,7 +29,7 @@ class MkDoxServeAction : AnAction("Serve mkdox"), DumbAware {
             return
         }
 
-        val command = serveCommand(state)
+        val command = serveCommand()
         if (!launchTerminal(project, basePath, command)) {
             val result = MkDoxCommandExecutor.execute(command, basePath)
             if (result.success) {
@@ -40,8 +40,8 @@ class MkDoxServeAction : AnAction("Serve mkdox"), DumbAware {
         }
     }
 
-    private fun serveCommand(state: MkDoxStateService.State): String =
-        if (state.hasScript) "mkdox.sh serve" else "mkdox serve"
+    private fun serveCommand(): String =
+        "if command -v mkdox.sh >/dev/null 2>&1; then mkdox.sh serve; else mkdox serve; fi"
 
     private fun launchTerminal(project: Project, basePath: Path, command: String): Boolean =
         try {

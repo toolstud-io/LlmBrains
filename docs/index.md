@@ -6,9 +6,8 @@ The icon should be ![like this](icon/mkdox-button.png) (or similar).
 
 * there always is the option 'Check mkdox'. This show a list of checkboxes:
     - is there a /docs in the repo Y/N
-    - is there a /mkdoxs.yml file in the root Y/N
+    - is there a /mkdocs.yml file in the root Y/N
     - is there a /docs/blog folder in the repo Y/N
-    - is there a mkdox.sh script in the path Y/N
     - is Docker running Y/N
 * if there is no `/docs` folder OR no `/mkdocs.yml` file
     - the icon is inactive (light gray)
@@ -17,9 +16,9 @@ The icon should be ![like this](icon/mkdox-button.png) (or similar).
         - this executes `mkdox -E "$(basename $root_folder)" new .` and 
         - opens `/.mkdocs.yml` file in editor
     - otherwise, it just warns that Docker should be running
-* if there is a `/docs` folder in the project AND there is a `/mkdocs.yml` file in the root AND there is a `mkdox.sh` script in the path
+* if there is a `/docs` folder in the project AND there is a `/mkdocs.yml` file in the root AND there is a `/docs/blog` directory
     - then the icon become active (bright light blue color)
-    - when the mouse pointer moves over it, there is an option 'Serve mkdox' => this executes `mkdox serve` in the root folder
+    - when the mouse pointer moves over it, there is an option 'Serve mkdox' => this tries `mkdox.sh serve` when available and otherwise executes `mkdox serve` in the root folder
     - if Docker is running,
         - this executes `mkdox serve` in a new terminal window
     - otherwise, it just warns that Docker should be running

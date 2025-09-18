@@ -41,7 +41,6 @@ class MkDoxCheckAction : AnAction("Check mkdox"), DumbAware {
             checkbox("Has docs directory (/docs)", state.hasDocsDirectory),
             checkbox("Has mkdocs.yml in project root", state.hasMkdocsFile),
             checkbox("Has docs/blog directory", state.hasBlogDirectory),
-            checkbox("mkdox.sh available on PATH", state.hasScript),
             checkbox("Docker is running", dockerRunning),
         )
 

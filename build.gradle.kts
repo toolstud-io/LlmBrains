@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
+    kotlin("jvm") version "2.1.0"
     id("org.jetbrains.intellij") version "1.17.3"
 }
 
@@ -13,8 +13,9 @@ repositories {
 }
 
 intellij {
-    // Use a modern IntelliJ Platform build so the Terminal API is available.
-    version.set("2024.1")
+    // Target PhpStorm 2025.2.1 so we compile and verify against the same build family (252.*).
+    version.set("2025.2.1")
+    type.set("PS")
     // Only require the built-in Terminal plugin; avoid Java plugin so PhpStorm is supported.
     plugins.set(listOf("org.jetbrains.plugins.terminal"))
 }
@@ -30,8 +31,8 @@ dependencies {
 
 tasks {
     patchPluginXml {
-        sinceBuild.set("241")
-        // Allow running on 2025.2 (build 252.*) and later minor updates
+        // PhpStorm 2025.2.1 corresponds to build family 252.*
+        sinceBuild.set("252")
         untilBuild.set("252.*")
         pluginDescription.set(
             """
@@ -45,6 +46,10 @@ tasks {
     // Ensure `./gradlew build` also produces the plugin ZIP
     named("build") {
         dependsOn("buildPlugin")
+    }
+
+    named("buildSearchableOptions") {
+        enabled = false
     }
 
     runIde {

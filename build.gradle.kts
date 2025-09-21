@@ -13,10 +13,10 @@ repositories {
 }
 
 intellij {
-    // Target PhpStorm 2025.2.1 so we compile and verify against the same build family (252.*).
-    version.set("2025.2.1")
-    type.set("PS")
-    // Only require the built-in Terminal plugin; avoid Java plugin so PhpStorm is supported.
+    // Build against IntelliJ IDEA 2023.1 (231.*) so the plugin stays compatible with all IDEs released in the last two years.
+    version.set("2023.1")
+    type.set("IC")
+    // Only require the built-in Terminal plugin so every JetBrains IDE with a terminal can load us.
     plugins.set(listOf("org.jetbrains.plugins.terminal"))
 }
 
@@ -31,9 +31,8 @@ dependencies {
 
 tasks {
     patchPluginXml {
-        // PhpStorm 2025.2.1 corresponds to build family 252.*
-        sinceBuild.set("252")
-        untilBuild.set("252.*")
+        // 231 corresponds to the 2023.1 release family; newer IDEs remain compatible without an explicit upper bound.
+        sinceBuild.set("231")
         pluginDescription.set(
             """
             LLM Brains: open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.

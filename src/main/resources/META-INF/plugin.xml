@@ -8,6 +8,9 @@
     </description>
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.forret.llmbrains.AgentSettingsConfigurable" displayName="LLM Brains"/>
+    </extensions>
     <actions>
         <group id="com.forret.llmbrains.Dropdown" class="com.forret.llmbrains.LlmBrainsActionGroup"
                text="🫴" description="Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal." popup="true"

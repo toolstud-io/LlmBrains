@@ -20,11 +20,11 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         if (activeAgents.isNotEmpty()) {
             actions += Separator.getInstance()
         }
-        actions += SimpleRunAction("❓ Check versions") {
-            project?.let { TerminalCommandRunner.run(it, "❓ Check", buildCheckScript()) }
+        actions += SimpleRunAction("❓ Check agent versions") {
+            project?.let { TerminalCommandRunner.run(it, "❓ Check Agents", buildCheckScript()) }
         }
-        actions += SimpleRunAction("update all agents") {
-            project?.let { TerminalCommandRunner.run(it, "⬆️ Update", buildUpdateScript(activeAgents)) }
+        actions += SimpleRunAction("🔄 Update all agents") {
+            project?.let { TerminalCommandRunner.run(it, "🔄️ Update Agents", buildUpdateScript(activeAgents)) }
         }
         return actions.toTypedArray()
     }
@@ -36,11 +36,13 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         val dollar = "${'$'}"
         return """
             bash -lc '
+            BOLD='\033[0;32m'
+            PLAIN='\033[0m' # No Color
             function check_version() {
                 if command -v ${dollar}2 &> /dev/null; then
-                    echo "- ${dollar}1 is installed: ${dollar}(${dollar}2 ${dollar}3 2>&1)"
+                    echo "- ${dollar}1 is installed:${dollar}BOLD ${dollar}(${dollar}2 ${dollar}3 2>&1) ${dollar}PLAIN"
                 else
-                    echo "! ${dollar}1 is NOT installed. You can install it with: ${dollar}4"
+                    echo "( ${dollar}1 is NOT installed. You can install it with: ${dollar}4 )"
                 fi
             }
             clear

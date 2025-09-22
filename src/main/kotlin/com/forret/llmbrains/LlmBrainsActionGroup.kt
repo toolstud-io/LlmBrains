@@ -30,22 +30,21 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
     }
 
     private fun buildCheckScript(): String {
-        val agentChecks = CodingAgents.all.joinToString(separator = "\n") { agent ->
-            "            check_version \"${agent.name}\"  \"${agent.command}\" \"${agent.versionArgs}\" \"${agent.installHint}\""
+        val scriptPath = LlmBrainsScriptInstaller.scriptPath()
+        val commands = CodingAgents.all.joinToString(separator = "\n") { agent ->
+            val name = shellQuote(agent.name)
+            val versionCommand = shellQuote(versionCommandFor(agent))
+            val installHint = shellQuote(agent.installHint)
+            "    llmbrains.sh check $name $versionCommand $installHint"
         }
-        val dollar = "${'$'}"
         return """
             bash -lc '
-            function check_version() {
-                if command -v ${dollar}2 &> /dev/null; then
-                    echo "- ${dollar}1 is installed: \033[0;33m${dollar}(${dollar}2 ${dollar}3 2>&1)\033[0m"
-                else
-                    echo "( ${dollar}1 is \\033[0;33m NOT installed \\033[0m . You can install it with: ${dollar}4 )"
-                fi
-            }
+            SCRIPT_PATH="${escapeForDoubleQuotes(scriptPath.toString())}"
+            SCRIPT_DIR=$(dirname "${'$'}SCRIPT_PATH")
+            PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
             clear
             echo "Checking CLI coding agents..."; echo
-$agentChecks
+$commands
             '
         """.trimIndent()
     }
@@ -56,30 +55,46 @@ $agentChecks
                 bash -lc 'echo "No coding agents are enabled. Enable them via Preferences > Tools > LLM Brains."'
             """.trimIndent()
         }
-        val dollar = "${'$'}"
-        val updateCalls = agents.joinToString(separator = "\n") { agent ->
-            "            update_agent \"${agent.name}\" \"${agent.command}\" \"${agent.updateHint}\""
+        val scriptPath = LlmBrainsScriptInstaller.scriptPath()
+        val commands = agents.joinToString(separator = "\n") { agent ->
+            val name = shellQuote(agent.name)
+            val binary = shellQuote(agent.command)
+            val updateHint = shellQuote(agent.updateHint)
+            val installHint = shellQuote(agent.installHint)
+            "    llmbrains.sh update $name $binary $updateHint $installHint"
         }
         return """
             bash -lc '
-            function update_agent() {
-                local name="${dollar}1"
-                local command="${dollar}2"
-                local hint="${dollar}3"
-                if command -v "${dollar}command" &> /dev/null; then
-                    echo "- Updating ${dollar}name..."
-                    eval "${dollar}hint"
-                else
-                    echo "! ${dollar}name is not installed. Run: ${dollar}hint"
-                fi
-                echo
-            }
+            SCRIPT_PATH="${escapeForDoubleQuotes(scriptPath.toString())}"
+            SCRIPT_DIR=$(dirname "${'$'}SCRIPT_PATH")
+            PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
             clear
             echo "Updating enabled coding agents..."; echo
-$updateCalls
+$commands
             echo "All done."
             '
         """.trimIndent()
+    }
+
+    private fun versionCommandFor(agent: CodingAgent): String =
+        listOf(agent.command, agent.versionArgs)
+            .filter { it.isNotBlank() }
+            .joinToString(" ")
+
+    private fun shellQuote(value: String): String {
+        val escaped = escapeForDoubleQuotes(value)
+        return "\"$escaped\""
+    }
+
+    private fun escapeForDoubleQuotes(value: String): String {
+        val builder = StringBuilder(value.length)
+        value.forEach { char ->
+            when (char) {
+                '\\', '"', '$', '`' -> builder.append('\\').append(char)
+                else -> builder.append(char)
+            }
+        }
+        return builder.toString()
     }
 
     private class SimpleRunAction(

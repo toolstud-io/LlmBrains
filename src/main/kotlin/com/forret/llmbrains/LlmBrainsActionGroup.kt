@@ -38,9 +38,9 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             bash -lc '
             function check_version() {
                 if command -v ${dollar}2 &> /dev/null; then
-                    echo "- ${dollar}1 is installed:\033[0;32m ${dollar}(${dollar}2 ${dollar}3 2>&1) \033[0m"
+                    echo "- ${dollar}1 is installed: \033[0;33m${dollar}(${dollar}2 ${dollar}3 2>&1)\033[0m"
                 else
-                    echo "( ${dollar}1 is NOT installed. You can install it with: ${dollar}4 )"
+                    echo "( ${dollar}1 is \\033[0;33m NOT installed \\033[0m . You can install it with: ${dollar}4 )"
                 fi
             }
             clear

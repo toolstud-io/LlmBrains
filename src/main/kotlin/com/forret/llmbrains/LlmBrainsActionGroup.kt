@@ -36,8 +36,8 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         val dollar = "${'$'}"
         return """
             bash -lc '
-            BOLD='\033[0;32m'
-            PLAIN='\033[0m' # No Color
+            BOLD="\033[0;32m"
+            PLAIN="\033[0m"
             function check_version() {
                 if command -v ${dollar}2 &> /dev/null; then
                     echo "- ${dollar}1 is installed:${dollar}BOLD ${dollar}(${dollar}2 ${dollar}3 2>&1) ${dollar}PLAIN"

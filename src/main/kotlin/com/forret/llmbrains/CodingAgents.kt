@@ -8,6 +8,7 @@ data class CodingAgent(
     val command: String,
     val versionArgs: String = "--version",
     val installHint: String,
+    val updateHint: String,
 ) {
     val dropdownLabel: String get() = "$HAND_EMOJI $name"
 }
@@ -19,24 +20,28 @@ object CodingAgents {
             name = "Claude Code",
             command = "claude",
             installHint = "npm install -g @anthropic-ai/claude-code",
+            updateHint = "npm update -g @anthropic-ai/claude-code",
         ),
         CodingAgent(
             id = "codex",
             name = "Codex CLI",
             command = "codex",
             installHint = "npm install -g @openai/codex",
+            updateHint = "npm update -g @openai/codex",
         ),
         CodingAgent(
             id = "gemini",
             name = "Gemini CLI",
             command = "gemini",
             installHint = "npm install -g @google/gemini-cli",
+            updateHint = "npm update -g @google/gemini-cli",
         ),
         CodingAgent(
             id = "qodo",
             name = "Qodo Command",
             command = "qodo",
             installHint = "npm install -g @qodo/command",
+            updateHint = "npm update -g @qodo/command",
         ),
     )
 

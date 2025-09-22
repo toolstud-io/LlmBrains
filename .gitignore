@@ -1,8 +1,9 @@
+.DS_Store
 .env
 /.cache/
+/.claude/
 /.gradle/
 /.idea/
+/.intellijPlatform/
 /.temp/
 /build/
-/.intellijPlatform/
-/.claude/

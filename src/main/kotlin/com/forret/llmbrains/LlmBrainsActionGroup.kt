@@ -20,7 +20,12 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         if (activeAgents.isNotEmpty()) {
             actions += Separator.getInstance()
         }
-        actions += SimpleRunAction("❓ Check versions") { project?.let { TerminalCommandRunner.run(it, "❓ Check", buildCheckScript()) } }
+        actions += SimpleRunAction("❓ Check versions") {
+            project?.let { TerminalCommandRunner.run(it, "❓ Check", buildCheckScript()) }
+        }
+        actions += SimpleRunAction("update all agents") {
+            project?.let { TerminalCommandRunner.run(it, "⬆️ Update", buildUpdateScript(activeAgents)) }
+        }
         return actions.toTypedArray()
     }
 
@@ -41,6 +46,38 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             clear
             echo "Checking CLI coding agents..."; echo
 $agentChecks
+            '
+        """.trimIndent()
+    }
+
+    private fun buildUpdateScript(agents: List<CodingAgent>): String {
+        if (agents.isEmpty()) {
+            return """
+                bash -lc 'echo "No coding agents are enabled. Enable them via Preferences > Tools > LLM Brains."'
+            """.trimIndent()
+        }
+        val dollar = "${'$'}"
+        val updateCalls = agents.joinToString(separator = "\n") { agent ->
+            "            update_agent \"${agent.name}\" \"${agent.command}\" \"${agent.updateHint}\""
+        }
+        return """
+            bash -lc '
+            function update_agent() {
+                local name="${dollar}1"
+                local command="${dollar}2"
+                local hint="${dollar}3"
+                if command -v "${dollar}command" &> /dev/null; then
+                    echo "- Updating ${dollar}name..."
+                    eval "${dollar}hint"
+                else
+                    echo "! ${dollar}name is not installed. Run: ${dollar}hint"
+                fi
+                echo
+            }
+            clear
+            echo "Updating enabled coding agents..."; echo
+$updateCalls
+            echo "All done."
             '
         """.trimIndent()
     }

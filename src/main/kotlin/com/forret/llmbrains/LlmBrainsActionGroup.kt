@@ -22,14 +22,14 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             actions += Separator.getInstance()
         }
         // Open IDE Settings > Tools > LLM Tools to enable/disable providers
-        actions += SimpleRunAction("Enable/Disable agents") {
+        actions += Separator.getInstance()
+        actions += SimpleRunAction("🤌 Enable/Disable agents") {
             ShowSettingsUtil.getInstance().showSettingsDialog(project, "LLM Tools")
         }
-        actions += Separator.getInstance()
-        actions += SimpleRunAction("❓ Check agent versions") {
-            project?.let { TerminalCommandRunner.run(it, "❓ Check Agents", buildCheckScript()) }
+        actions += SimpleRunAction("👍 Check all versions") {
+            project?.let { TerminalCommandRunner.run(it, "❔ Check Agents", buildCheckScript()) }
         }
-        actions += SimpleRunAction("🔄 Update all agents") {
+        actions += SimpleRunAction("🤞 Update all agents") {
             project?.let { TerminalCommandRunner.run(it, "🔄️ Update Agents", buildUpdateScript(activeAgents)) }
         }
         return actions.toTypedArray()

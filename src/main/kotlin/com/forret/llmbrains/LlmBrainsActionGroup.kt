@@ -15,7 +15,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         val activeAgents = settings.activeAgents()
         activeAgents.forEach { agent ->
             actions += SimpleRunAction(agent.dropdownLabel) {
-                project?.let { TerminalCommandRunner.run(it, agent.name, agent.command) }
+                project?.let { TerminalCommandRunner.run(it, "🫴 " + agent.name, agent.command) }
             }
         }
         if (activeAgents.isNotEmpty()) {
@@ -54,7 +54,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             SCRIPT_DIR=$(dirname "${'$'}SCRIPT_PATH")
             PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
             llmbrains.sh check-all "$agentData"
-            ' && read -n 1 -s -r -p "Press any key to close this window" && exit 0
+            '
         """.trimIndent()
     }
 

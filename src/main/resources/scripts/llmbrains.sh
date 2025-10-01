@@ -40,15 +40,17 @@ case "$subcommand" in
       version_output=$(eval "$version_command" 2>&1)
       status=$?
       if [[ $status -eq 0 ]]; then
-        echo "👍 $name is installed: $version_output"
+        #echo "👍 $name is installed: $version_output"
+        printf "👍 %-20s is installed: %s\n" "$name" "$version_output"
       else
         echo "🖐 $name is installed but the version command failed (exit $status): $version_output"
       fi
     else
       if [[ -n "$install_hint" ]]; then
-        echo "✖️ $name is NOT installed. You can install it with: $install_hint "
+        #echo "✖️ $name is NOT installed. You can install it with: $install_hint "
+        printf "✖️%-20s is NOT installed. You can install it with: %s\n" "$name" "$install_hint"
       else
-        echo "✖️ $name is NOT installed. )"
+        printf "✖️%-20s is NOT installed\n" "$name"
       fi
     fi
     ;;

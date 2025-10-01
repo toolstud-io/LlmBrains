@@ -52,7 +52,11 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             SCRIPT_PATH="${escapeForDoubleQuotes(scriptPath.toString())}"
             SCRIPT_DIR=$(dirname "${'$'}SCRIPT_PATH")
             PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
+            clear
             llmbrains.sh check-all "$agentData"
+            echo "( This terminal will close in 10 seconds... )"
+            sleep 10
+            exit 0
             '
         """.trimIndent()
     }

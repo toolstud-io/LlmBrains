@@ -6,6 +6,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.Separator
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.options.ShowSettingsUtil
+import com.intellij.ide.plugins.PluginManagerCore
+import com.intellij.openapi.extensions.PluginId
 
 class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agent in a new terminal window.", null), DumbAware {
     override fun getChildren(e: AnActionEvent?): Array<AnAction> {
@@ -33,6 +35,8 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         actions += SimpleRunAction("🤞 Update all agents") {
             project?.let { TerminalCommandRunner.run(it, "🤞 Update Agents", buildUpdateScript(activeAgents)) }
         }
+        actions += Separator.getInstance()
+        actions += SimpleLabelAction("LLM Brains v${getPluginVersion()}")
         return actions.toTypedArray()
     }
 
@@ -130,10 +134,24 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         return value.replace("'", "''")
     }
 
+    private fun getPluginVersion(): String {
+        val plugin = PluginManagerCore.getPlugin(PluginId.getId("com.forret.llmbrains"))
+        return plugin?.version ?: "dev"
+    }
+
     private class SimpleRunAction(
         text: String,
         val runner: () -> Unit
     ) : AnAction(text), DumbAware {
         override fun actionPerformed(e: AnActionEvent) = runner()
+    }
+
+    private class SimpleLabelAction(text: String) : AnAction(text), DumbAware {
+        override fun actionPerformed(e: AnActionEvent) {
+            // no-op: this is a non-clickable label
+        }
+        override fun update(e: AnActionEvent) {
+            e.presentation.isEnabled = false
+        }
     }
 }

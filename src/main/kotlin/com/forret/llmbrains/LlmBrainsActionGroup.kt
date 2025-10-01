@@ -54,9 +54,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             SCRIPT_DIR=$(dirname "${'$'}SCRIPT_PATH")
             PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
             llmbrains.sh check-all "$agentData"
-            '
-            sleep 10
-            exit
+            ' && read -n 1 -s -r -p "Press any key to close this window" && exit 0
         """.trimIndent()
     }
 

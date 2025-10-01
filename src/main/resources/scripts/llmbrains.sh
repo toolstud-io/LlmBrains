@@ -6,6 +6,8 @@ usage() {
 Usage:
   llmbrains.sh check <friendly-name> <version-command> [install-hint]
   llmbrains.sh update <friendly-name> <binary> <update-command> [install-hint]
+  llmbrains.sh check-all <agent-definitions-json>
+  llmbrains.sh update-all <agent-definitions-json> <active-agent-ids>
 USAGE
 }
 
@@ -82,6 +84,49 @@ case "$subcommand" in
       echo "! $name is not installed. Run: $hint"
     fi
     echo
+    ;;
+  check-all)
+    if [[ $# -lt 1 ]]; then
+      echo "llmbrains.sh: check-all requires agent definitions JSON" >&2
+      usage >&2
+      exit 1
+    fi
+    agents_json="$1"
+
+    clear
+    echo "Checking CLI coding agents..."; echo
+
+    echo "$agents_json" | while IFS='|' read -r name command version_args install_hint; do
+      if [[ -n "$name" ]]; then
+        version_command="$command $version_args"
+        "$0" check "$name" "$version_command" "$install_hint"
+      fi
+    done
+    ;;
+  update-all)
+    if [[ $# -lt 2 ]]; then
+      echo "llmbrains.sh: update-all requires agent definitions JSON and active agent IDs" >&2
+      usage >&2
+      exit 1
+    fi
+    agents_json="$1"
+    active_ids="$2"
+
+    if [[ -z "$active_ids" ]]; then
+      echo "No coding agents are enabled. Enable them via Preferences > Tools > LLM Brains."
+      exit 0
+    fi
+
+    clear
+    echo "Updating enabled coding agents..."; echo
+
+    echo "$agents_json" | while IFS='|' read -r id name command version_args install_hint update_hint; do
+      if [[ -n "$id" ]] && [[ ",$active_ids," == *",$id,"* ]]; then
+        "$0" update "$name" "$command" "$update_hint" "$install_hint"
+      fi
+    done
+
+    echo "All done."
     ;;
   *)
     echo "llmbrains.sh: unknown subcommand '$subcommand'" >&2

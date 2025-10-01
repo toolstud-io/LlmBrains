@@ -1,5 +1,7 @@
-![GitHub top language](https://img.shields.io/github/languages/top/toolstud-io/LlmBrains)
+![GitHub Tag](https://img.shields.io/github/v/tag/toolstud-io/LlmBrains)
+![GitHub Release](https://img.shields.io/github/v/release/toolstud-io/LlmBrains)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/toolstud-io/LlmBrains)
+![JetBrains Plugin Version](https://img.shields.io/jetbrains/plugin/v/28522)
 ![JetBrains Plugin Downloads](https://img.shields.io/jetbrains/plugin/d/28522)
 
 

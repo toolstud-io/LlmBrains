@@ -46,9 +46,9 @@ case "$subcommand" in
       fi
     else
       if [[ -n "$install_hint" ]]; then
-        echo "👎 $name is NOT installed. You can install it with: $install_hint "
+        echo "✖️ $name is NOT installed. You can install it with: $install_hint "
       else
-        echo "👎 $name is NOT installed. )"
+        echo "✖️ $name is NOT installed. )"
       fi
     fi
     ;;

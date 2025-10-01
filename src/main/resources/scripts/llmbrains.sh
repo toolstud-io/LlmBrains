@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
+# ANSI color codes
+COL_RESET="\033[0m"
+COL_YELLOW="\033[0;33m"
+COL_BRIGHT_GREEN="\033[1;32m"
+#COL_BLACK="\033[0;30m"
+#COL_RED="\033[0;31m"
+#COL_GREEN="\033[0;32m"
+#COL_BLUE="\033[0;34m"
+#COL_MAGENTA="\033[0;35m"
+#COL_CYAN="\033[0;36m"
+#COL_WHITE="\033[0;37m"
+#COL_BRIGHT_BLACK="\033[1;30m"
+#COL_BRIGHT_RED="\033[1;31m"
+#COL_BRIGHT_YELLOW="\033[1;33m"
+#COL_BRIGHT_BLUE="\033[1;34m"
+#COL_BRIGHT_MAGENTA="\033[1;35m"
+#COL_BRIGHT_CYAN="\033[1;36m"
+#COL_BRIGHT_WHITE="\033[1;37m"
+
 usage() {
   cat <<'USAGE'
 Usage:
@@ -41,16 +60,16 @@ case "$subcommand" in
       status=$?
       if [[ $status -eq 0 ]]; then
         #echo "👍 $name is installed: $version_output"
-        printf "👍 %-20s is installed: %s\n" "$name" "$version_output"
+        printf "👍 %-20s is installed: $COL_BRIGHT_GREEN%s$COL_RESET\n" "$name" "$version_output"
       else
         echo "🖐 $name is installed but the version command failed (exit $status): $version_output"
       fi
     else
       if [[ -n "$install_hint" ]]; then
         #echo "✖️ $name is NOT installed. You can install it with: $install_hint "
-        printf "✖️%-20s is NOT installed. You can install it with: %s\n" "$name" "$install_hint"
+        printf "✖️ %-20s is NOT installed. You can install it with: $COL_YELLOW%s$COL_RESET\n" "$name" "$install_hint"
       else
-        printf "✖️%-20s is NOT installed\n" "$name"
+        printf "✖️ %-20s is NOT installed\n" "$name"
       fi
     fi
     ;;

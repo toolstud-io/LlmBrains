@@ -20,7 +20,7 @@ theme:
     - navigation.tracking
     - search.highlight
     - search.suggest
-#    - toc.integrate
+    - toc.integrate
   icon:
     repo: fontawesome/brands/bitbucket
 

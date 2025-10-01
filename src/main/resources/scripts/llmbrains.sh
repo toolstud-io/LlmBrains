@@ -64,14 +64,13 @@ case "$subcommand" in
     install_hint="${4:-}"
 
     if command -v "$binary" >/dev/null 2>&1; then
-      echo "🤞 Updating $name..."
+      echo "🤞 Updating $name ..."
       update_output=$(eval "$update_command" 2>&1)
       status=$?
       if [[ $status -eq 0 ]]; then
         if [[ -n "$update_output" ]]; then
           echo "$update_output"
         fi
-        echo "👏 Update completed."
       else
         echo "$update_output"
         echo "! Failed to update $name (exit $status)."

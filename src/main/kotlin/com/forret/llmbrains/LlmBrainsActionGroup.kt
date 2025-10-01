@@ -55,6 +55,8 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
             llmbrains.sh check-all "$agentData"
             '
+            sleep 10
+            exit
         """.trimIndent()
     }
 

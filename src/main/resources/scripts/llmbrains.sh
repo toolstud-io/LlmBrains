@@ -60,16 +60,16 @@ case "$subcommand" in
       status=$?
       if [[ $status -eq 0 ]]; then
         #echo "👍 $name is installed: $version_output"
-        printf "👍 %-20s is installed: $COL_BRIGHT_GREEN%s$COL_RESET\n" "$name" "$version_output"
+        printf "👍 %-16s is installed: $COL_BRIGHT_GREEN%s$COL_RESET\n" "$name" "$version_output"
       else
         echo "🖐 $name is installed but the version command failed (exit $status): $version_output"
       fi
     else
       if [[ -n "$install_hint" ]]; then
         #echo "✖️ $name is NOT installed. You can install it with: $install_hint "
-        printf "✖️ %-20s is NOT installed. You can install it with: $COL_YELLOW%s$COL_RESET\n" "$name" "$install_hint"
+        printf "✖️ %-16s is NOT installed. You can install it with: $COL_YELLOW%s$COL_RESET\n" "$name" "$install_hint"
       else
-        printf "✖️ %-20s is NOT installed\n" "$name"
+        printf "✖️ %-16s is NOT installed\n" "$name"
       fi
     fi
     ;;

@@ -2,10 +2,20 @@
     <id>com.forret.llmbrains</id>
     <name>LLM Brains</name>
     <vendor email="peter@forret.com">Peter Forret</vendor>
-    <version>0.1.0</version>
+    <version>0.3.7</version>
     <description>
         Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.
     </description>
+    <change-notes>
+        <p>0.3.7 — 2025-10-01</p>
+        <ul>
+            <li>Added OpenCode as coding agent</li>
+            <li>Enable/disable agents via Settings/LLM Brains</li>
+            <li>Cleaner agent check versions</li>
+            <li>Cleaner agent update</li>
+            <li>Add version to dropdown</li>
+        </ul>
+    </change-notes>
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
     <extensions defaultExtensionNs="com.intellij">

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/docker/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/docker/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/agents/claude/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/claude/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/agents/codex/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/codex/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/agents/gemini/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/gemini/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/agents/qodo/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/qodo/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
     <url>
-         <loc>https://github.com/toolstud-io/LlmBrains/blog/</loc>
+         <loc>https://toolstud-io.github.io/LlmBrains/blog/</loc>
          <lastmod>2025-10-01</lastmod>
     </url>
 </urlset>

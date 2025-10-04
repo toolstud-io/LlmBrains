@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://toolstud-io.github.io/LlmBrains/agents/qodo/">
+        <link rel="canonical" href="https://toolstud-io.github.io/LlmBrains/agents/grok/">
       
       
-        <link rel="prev" href="../opencode/">
+        <link rel="prev" href="../gemini/">
       
       
-        <link rel="next" href="../../blog/">
+        <link rel="next" href="../opencode/">
       
       
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Qodo CLI - LLM Brains</title>
+        <title>Grok CLI - by xAI - LLM Brains</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qodo-cli" class="md-skip">
+        <a href="#grok-cli-by-xai" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Qodo CLI
+              Grok CLI - by xAI
             
           </span>
         </div>
@@ -434,48 +434,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../grok/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Grok CLI - by xAI
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../opencode/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Opencode
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -492,7 +450,7 @@
           
   
   <span class="md-ellipsis">
-    Qodo CLI
+    Grok CLI - by xAI
   </span>
   
 
@@ -503,7 +461,7 @@
         
   
   <span class="md-ellipsis">
-    Qodo CLI
+    Grok CLI - by xAI
   </span>
   
 
@@ -534,6 +492,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
       Usage
@@ -546,6 +513,48 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opencode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opencode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qodo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qodo CLI
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -779,78 +788,41 @@
                   
 
 
-<h1 id="qodo-cli">Qodo CLI<a class="headerlink" href="#qodo-cli" title="Permanent link">&para;</a></h1>
+<h1 id="grok-cli-by-xai">Grok CLI - by xAI<a class="headerlink" href="#grok-cli-by-xai" title="Permanent link">&para;</a></h1>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># install with npm</span>
-npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@qodo/command
+<div class="highlight"><pre><span></span><code><span class="c1"># Install with npm</span>
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@vibe-kit/grok-cli
+<span class="c1"># update to latest version with npm</span>
+npm<span class="w"> </span>update<span class="w"> </span>-g<span class="w"> </span>@vibe-kit/grok-cli
+</code></pre></div>
+<blockquote>
+<p>via <a href="https://github.com/superagent-ai/grok-cli">github.com/superagent-ai/grok-cli</a></p>
+</blockquote>
+<h2 id="get-version">Get Version<a class="headerlink" href="#get-version" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>% grok -V
+1.0.1
 </code></pre></div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>  Usage
-    $ qodo [options] &lt;prompt&gt;
-    $ qodo run &lt;command&gt; [extra instructions]
+<div class="highlight"><pre><span></span><code>Usage: grok [options] [command] [message...]
 
-  Commands
-    run &lt;command&gt;          Execute a specific agent command with optional extra instructions
-    login                  Log in to Qodo
-    models                 Get available models
-    chat                   Start an interactive chat session
-    key list               List all API keys
-    key create &lt;name&gt;      Create a new API key with the given name
-    key revoke &lt;name&gt;      Revoke an API key by name
-    create-agent           Create a new agent by translating user requirements into a valid configuration
-    list-agents            List available agents from configuration (interactive in CLI mode)
-    list-mcp               List available local and remote tools
-    self-review            Analyze git changes and group them into logical change groups (opens web interface)
-    update                 Manage auto-updates (--check, --install, --configure)
-    -h, --help             Show help and exit
-    chain &quot;A &gt; B &gt; C&quot;     Run multiple agents sequentially (quote the chain!)
-    -v, --version          Show version and exit
-    -l, --log=path         Redirect console output to a file | stdout | stderr
-    -y, --yes              Confirm all prompts automatically (useful for CI)
-    -q, --silent           Suppress all console output except the final result (logs go to /dev/null)
-    -d, --debug            Enable debug mode with verbose logging and no data truncation
-    --dir=path         Specify project root directories (can be used multiple times)
-    --ci                   Run commands in CI mode
-    --mcp                  Run commands as tools from agent config in MCP-server-like mode
-    --ui                   Open Qodo with web interface
-    --webhook              Run commands as tools from agent config in webhook mode
-    --slack                Run as Slack bot (HTTP webhook mode by default)
-    -p, --port=number      Specify custom port for server modes (webhook, slack, mcp, ui)
-    --plan                 Use planning execution strategy (agent plans before acting)
-    --act                  Use direct execution strategy (agent acts immediately)
-    -m, --model=model_name Specify a custom model to use
-    --agent-file=path      Specify a custom path to agent configuration file
-    --mcp-file=path        Specify a custom path to mcp.json
-    -r, --resume=session_id Resume a task with the given session ID
-    --set key=value        Set custom key-value pairs (can be used multiple times)
-    --no-builtin           Disable built-in MCP servers (ripgrep, filesystem, git)
-    -t, --tools=list       Specify authorized tools (comma-separated, e.g., shell,git,filesystem)
-                           Note: Some tools have dependencies (e.g., qodo_merge requires git)
-    --tool &lt;name&gt;          Specify authorized tool (can be used multiple times, e.g., --tool shell --tool git --tool filesystem)
-    --permissions=level    Set permissions level (r=read, rw=read+write, rwx=full, -=none)
-    --with=session_id       Preload context with a previous session summarization (used before task/hotstart)
-    --sandbox=mode         Run shell commands in sandbox (macOS only) [off|permissive|restrictive|path/to/profile.sb] (default: off)
+A conversational AI CLI tool powered by Grok with text editor capabilities
 
-  Examples
-    $ qodo chain &quot;improve &gt; review &gt; open-pr&quot;
-    $ qodo chain &quot;improve &gt; review &gt; open-pr&quot; --chain-step-timeout=600000
-    $ qodo chain &quot;improve &gt; review &gt; open-pr&quot; --chain-continue-on-error
-    $ qodo &quot;Review my latest changes and suggest improvements&quot;
-    $ qodo run review
-    $ qodo run review &quot;focus on security issues&quot;
-    $ qodo review --set coverage_score_threshold=0.8
-    $ qodo self-review
-    $ qodo &quot;Analyze code&quot; --dir /path/to/project1 --dir /path/to/project2 --permissions=r
-    $ qodo chat
-    $ qodo key list
-    $ qodo key create my-ci-key
-    $ qodo key revoke my-old-key
-    $ qodo create-agent --set goal=&quot;review code&quot; --set description=&quot;analyze pull requests&quot;
-    $ qodo list-agents
-    $ qodo list-mcp
-    $ qodo --ui
-    $ qodo --tools=shell,filesystem &quot;analyze this codebase&quot;
-    $ qodo --sandbox=./custom-profile.sb &quot;run a shell command with custom sandbox&quot;
+Arguments:
+  message                     Initial message to send to Grok
+
+Options:
+  -V, --version               output the version number
+  -d, --directory &lt;dir&gt;       set working directory (default: &quot;/Users/pforret/Code/pforret/LlmBrains&quot;)
+  -k, --api-key &lt;key&gt;         Grok API key (or set GROK_API_KEY env var)
+  -u, --base-url &lt;url&gt;        Grok API base URL (or set GROK_BASE_URL env var)
+  -m, --model &lt;model&gt;         AI model to use (e.g., grok-code-fast-1, grok-4-latest) (or set GROK_MODEL env var)
+  -p, --prompt &lt;prompt&gt;       process a single prompt and exit (headless mode)
+  --max-tool-rounds &lt;rounds&gt;  maximum number of tool execution rounds (default: 400) (default: &quot;400&quot;)
+  -h, --help                  display help for command
+
+Commands:
+  git                         Git operations with AI assistance
+  mcp                         Manage MCP (Model Context Protocol) servers
 </code></pre></div>
 
 

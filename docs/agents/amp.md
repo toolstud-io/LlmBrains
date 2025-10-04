@@ -1,4 +1,4 @@
-# Amp CLI (by SourceGraph)
+# Amp CLI - by SourceGraph
 
 ## Installation
 

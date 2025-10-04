@@ -41,7 +41,6 @@ tasks {
             Adds a toolbar button (🫴) with options and a check to see what is installed.
             """.trimIndent()
         )
-        changeNotes.set("Initial version.")
     }
 
     // Ensure `./gradlew build` also produces the plugin ZIP

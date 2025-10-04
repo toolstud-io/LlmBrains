@@ -7,13 +7,9 @@
         Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.
     </description>
     <change-notes>
-        <p>0.3.7 — 2025-10-01</p>
+        <p>0.4.3 — 2025-10-04</p>
         <ul>
-            <li>Added OpenCode as coding agent</li>
-            <li>Enable/disable agents via Settings/LLM Brains</li>
-            <li>Cleaner agent check versions</li>
-            <li>Cleaner agent update</li>
-            <li>Add version to dropdown</li>
+            <li>Added Grok/Droid/... as coding agent</li>
         </ul>
     </change-notes>
     <depends>com.intellij.modules.platform</depends>

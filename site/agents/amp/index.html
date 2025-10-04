@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://toolstud-io.github.io/LlmBrains/agents/codex/">
+        <link rel="canonical" href="https://toolstud-io.github.io/LlmBrains/agents/amp/">
       
       
-        <link rel="prev" href="../claude/">
+        <link rel="prev" href="../../docker/">
       
       
-        <link rel="next" href="../droid/">
+        <link rel="next" href="../claude/">
       
       
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Codex CLI - by OpenAI - LLM Brains</title>
+        <title>Droid CLI (by Factory.ai) - LLM Brains</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#codex-cli-by-openai" class="md-skip">
+        <a href="#droid-cli-by-factoryai" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Codex CLI - by OpenAI
+              Droid CLI (by Factory.ai)
             
           </span>
         </div>
@@ -215,7 +215,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../amp/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   Agents
@@ -371,48 +371,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../amp/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Droid CLI (by Factory.ai)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../claude/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Claude Code - by Anthropic
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -429,7 +387,7 @@
           
   
   <span class="md-ellipsis">
-    Codex CLI - by OpenAI
+    Droid CLI (by Factory.ai)
   </span>
   
 
@@ -440,7 +398,7 @@
         
   
   <span class="md-ellipsis">
-    Codex CLI - by OpenAI
+    Droid CLI (by Factory.ai)
   </span>
   
 
@@ -492,6 +450,48 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../claude/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Claude Code - by Anthropic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Codex CLI - by OpenAI
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -851,97 +851,168 @@
                   
 
 
-<h1 id="codex-cli-by-openai">Codex CLI - by OpenAI<a class="headerlink" href="#codex-cli-by-openai" title="Permanent link">&para;</a></h1>
+<h1 id="droid-cli-by-factoryai">Droid CLI (by Factory.ai)<a class="headerlink" href="#droid-cli-by-factoryai" title="Permanent link">&para;</a></h1>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install with npm</span>
-npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@openai/codex
-<span class="c1"># update to latest version with npm</span>
-npm<span class="w"> </span>update<span class="w"> </span>-g<span class="w"> </span>@openai/codex
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@sourcegraph/amp
 
-<span class="c1"># Install with Homebrew</span>
-brew<span class="w"> </span>install<span class="w"> </span>codex
+<span class="c1"># update to latest version with npm</span>
+npm<span class="w"> </span>update<span class="w"> </span>-g<span class="w"> </span>@sourcegraph/amp
 </code></pre></div>
 <blockquote>
-<p>via <a href="https://developers.openai.com/codex/cli/">developers.openai.com/codex/cli/</a></p>
+<p>via <a href="https://ampcode.com/manual#getting-started-command-line-interface">ampcode.com/manual</a></p>
 </blockquote>
 <h2 id="get-version">Get Version<a class="headerlink" href="#get-version" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>% codex -V
-codex-cli 0.36.0
+<div class="highlight"><pre><span></span><code>% amp --version
+0.0.1759608074-g34c1da (released 2025-10-04T20:05:53.134Z)
 </code></pre></div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>Codex CLI
+<div class="highlight"><pre><span></span><code>Amp CLI
 
-If no subcommand is specified, options will be forwarded to the interactive CLI.
-
-Usage: codex [OPTIONS] [PROMPT]
-       codex [OPTIONS] [PROMPT] &lt;COMMAND&gt;
+Usage: amp [options] [command]
 
 Commands:
-  exec        Run Codex non-interactively [aliases: e]
-  login       Manage login
-  logout      Remove stored authentication credentials
-  mcp         [experimental] Run Codex as an MCP server and manage MCP servers
-  proto       Run the Protocol stream via stdin/stdout [aliases: p]
-  completion  Generate shell completion scripts
-  debug       Internal debugging commands
-  apply       Apply the latest diff produced by Codex agent as a `git apply` to your local working tree [aliases: a]
-  resume      Resume a previous interactive session (picker by default; use --last to continue the most recent)
-  help        Print this message or the help of the given subcommand(s)
 
-Arguments:
-  [PROMPT]
-          Optional user prompt to start the session
+  logout       Log out by removing stored API key
+  login        Log in to Amp
+  threads      [alias: t, thread] Manage threads
+    new        [alias: n] Create a new thread
+    continue   [alias: c] Continue an existing thread
+    fork       [alias: f] Fork an existing thread
+    list       [alias: l, ls] List all threads
+    share      [alias: s] Share a thread
+    compact    [alias: co] Compact a thread
+  tools        [alias: tool] Tool management commands
+    list       [alias: ls] List all active tools (including MCP tools)
+    show       Show details about an active tool
+    make       Sets up a skeleton tool in your toolbox
+    use        Invoke a tool with arguments or JSON input from stdin
+  permissions  [alias: permission] Manage permissions
+    list       [alias: ls] List permissions
+    test       Test permissions
+    edit       Edit permissions
+    add        Add permission rule
+  mcp          Manage MCP servers
+    add        Add an MCP server configuration
+  connect      Connect CLI to web interface for multi-thread management
+  doctor       Generate support bundle
+  update       Update Amp CLI
 
 Options:
-  -c, --config &lt;key=value&gt;
-          Override a configuration value that would otherwise be loaded from `~/.codex/config.toml`. Use a dotted path (`foo.bar.baz`) to override nested values. The `value` portion is parsed as JSON. If it fails to parse as JSON, the raw string is
-          used as a literal.
 
-          Examples: - `-c model=&quot;o3&quot;` - `-c &#39;sandbox_permissions=[&quot;disk-full-read-access&quot;]&#39;` - `-c shell_environment_policy.inherit=all`
-
-  -i, --image &lt;FILE&gt;...
-          Optional image(s) to attach to the initial prompt
-
-  -m, --model &lt;MODEL&gt;
-          Model the agent should use
-
-      --oss
-          Convenience flag to select the local open source model provider. Equivalent to -c model_provider=oss; verifies a local Ollama server is running
-
-  -p, --profile &lt;CONFIG_PROFILE&gt;
-          Configuration profile from config.toml to specify default options
-
-  -s, --sandbox &lt;SANDBOX_MODE&gt;
-          Select the sandbox policy to use when executing model-generated shell commands
-
-          [possible values: read-only, workspace-write, danger-full-access]
-
-  -a, --ask-for-approval &lt;APPROVAL_POLICY&gt;
-          Configure when the model requires human approval before executing a command
-
-          Possible values:
-          - untrusted:  Only run &quot;trusted&quot; commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the &quot;trusted&quot; set
-          - on-failure: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution
-          - on-request: The model decides when to ask the user for approval
-          - never:      Never ask for user approval Execution failures are immediately returned to the model
-
-      --full-auto
-          Convenience alias for low-friction sandboxed automatic execution (-a on-failure, --sandbox workspace-write)
-
-      --dangerously-bypass-approvals-and-sandbox
-          Skip all confirmation prompts and execute commands without sandboxing. EXTREMELY DANGEROUS. Intended solely for running in environments that are externally sandboxed
-
-  -C, --cd &lt;DIR&gt;
-          Tell the agent to use the specified directory as its working root
-
-      --search
-          Enable web search (off by default). When enabled, the native Responses `web_search` tool is available to the model (no per‑call approval)
-
-  -h, --help
-          Print help (see a summary with &#39;-h&#39;)
-
+  --visibility &lt;visibility&gt;
+      Set thread visibility (private, public, workspace, group)
   -V, --version
-          Print version
+      output the version number
+  --notifications
+      Enable sound notifications (enabled by default when not in execute mode)
+  --no-notifications
+      Disable sound notifications (enabled by default when not in execute mode)
+  --settings-file &lt;value&gt;
+      Custom settings file path (overrides the default location /Users/pforret/.config/amp/settings.json)
+  --log-level &lt;value&gt;
+      Set log level (error, warn, info, debug, audit)
+  --log-file &lt;value&gt;
+      Set log file location (overrides the default location /Users/pforret/.cache/amp/logs/cli.log)
+  --dangerously-allow-all
+      Disable all command confirmation prompts (agent will execute all commands without asking)
+  --jetbrains
+      Enable JetBrains integration. When enabled, Amp automatically includes your open JetBrains file and text selection with every message.
+  --no-jetbrains
+      Disable JetBrains integration.
+  --mcp-config &lt;value&gt;
+      JSON configuration or file path for MCP servers to merge with existing settings
+  -x, --execute [message]
+      Use execute mode, optionally with user message. In execute mode, agent will execute provided prompt (either as argument, or via stdin). Only last assistant message is printed. Enabled automatically when redirecting stdout.
+
+Environment variables:
+
+  AMP_API_KEY        API key for Amp (see https://ampcode.com/settings)
+  AMP_URL            URL for the Amp service (default is https://ampcode.com/)
+  AMP_LOG_LEVEL      Set log level (can also use --log-level)
+  AMP_LOG_FILE       Set log file location (can also use --log-file)
+  AMP_SETTINGS_FILE  Set settings file path (can also use --settings-file, default: /Users/pforret/.config/amp/settings.json)
+
+Examples:
+
+Start an interactive session:
+
+  $ amp
+
+Start an interactive session with a user message:
+
+  $ echo &quot;commit all my unstaged changes&quot; | amp
+
+Use execute mode (--execute or -x) to send a command to an agent, have it execute it, print only the agent&#39;s last message, and then exit:
+
+  $ amp -x &quot;what file in this folder is in markdown format?&quot;
+  All Markdown files in this folder:
+  - README.md (root)
+  - AGENT.md (root)
+  - Documentation (7 files in doc/)
+  - Various README.md files in subdirectories
+  Total: **13 Markdown files** found across the project.
+
+Use execute mode and allow agent to use tools that would require approval:
+
+  $ amp --dangerously-allow-all -x &quot;Rename all .markdown files to .md. Only print list of renamed files.&quot;
+  - readme.markdown → readme.md
+  - ghostty.markdown → ghostty.md
+
+Pipe a command to the agent and use execute mode:
+
+  $ echo &quot;commit all my unstaged changes&quot; | amp -x --dangerously-allow-all
+  Done. I have committed all your unstaged changes.
+
+Pipe data to the agent and send along a prompt in execute mode:
+
+  $ cat ~/.zshrc | amp -x &quot;what does the &#39;beautiful&#39; function do?&quot;
+  The `beautiful` function creates an infinite loop that prints the letter &quot;o&quot; in cycling colors every 0.2 seconds.
+
+Execute a prompt from a file and store final assistant message output in a file (redirecting stdout is equivalent to providing -x/--execute):
+
+  $ amp &lt; prompt.txt &gt; output.txt
+
+Add an MCP server with a local command:
+
+  $ amp mcp add context7 -- npx -y @upstash/context7-mcp
+
+Add an MCP server with environment variables:
+
+  $ amp mcp add postgres --env PGUSER=orb -- npx -y @modelcontextprotocol/server-postgres postgresql://localhost/orbing
+
+Add a remote MCP server:
+
+  $ amp mcp add hugging-face https://huggingface.co/mcp
+
+Configuration:
+
+Amp can be configured using a JSON settings file located at /Users/pforret/.config/amp/settings.json. All settings use the &quot;amp.&quot; prefix.
+
+Settings reference:
+
+  amp.notifications.enabled
+      Enable system sound notifications when agent completes tasks
+  amp.notifications.system.enabled
+      Enable system notifications when terminal is not focused
+  amp.mcpServers
+      Model Context Protocol servers to connect to for additional tools
+  amp.tools.disable
+      Array of tool names to disable. Use &#39;builtin:toolname&#39; to disable only the builtin tool with that name (allowing an MCP server to provide a tool by that name).
+  amp.permissions
+      Permission rules for tool calls. See amp permissions --help
+  amp.guardedFiles.allowlist
+      Array of file glob patterns that are allowed to be accessed without confirmation. Takes precedence over the built-in denylist.
+  amp.dangerouslyAllowAll
+      Disable all command confirmation prompts (agent will execute all commands without asking)
+  amp.git.commit.coauthor.enabled
+      Enable adding Amp as co-author in git commits
+  amp.git.commit.ampThread.enabled
+      Enable adding Amp-Thread trailer in git commits
+  amp.proxy
+      Proxy URL used for both HTTP and HTTPS requests to the Amp server
+  amp.updates.mode
+      Control update checking behavior: &quot;warn&quot; shows update notifications, &quot;disabled&quot; turns off checking, &quot;auto&quot; automatically runs update.
 </code></pre></div>
 
 

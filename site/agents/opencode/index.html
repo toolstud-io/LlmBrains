@@ -27,7 +27,7 @@
     
     
       
-        <title>Opencode - LLM Brains</title>
+        <title>OpenCode CLI - LLM Brains</title>
       
     
     
@@ -76,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#opencode-cli" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -107,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Opencode
+              OpenCode CLI
             
           </span>
         </div>
@@ -210,7 +215,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../claude/" class="md-tabs__link">
+        <a href="../amp/" class="md-tabs__link">
           
   
   Agents
@@ -369,6 +374,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../amp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Droid CLI (by Factory.ai)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../claude/" class="md-nav__link">
         
   
@@ -395,6 +421,27 @@
   
   <span class="md-ellipsis">
     Codex CLI - by OpenAI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../droid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Droid CLI (by Factory.ai)
   </span>
   
 
@@ -459,16 +506,75 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    OpenCode CLI
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Opencode
+    OpenCode CLI
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -487,6 +593,27 @@
   
   <span class="md-ellipsis">
     Qodo CLI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../warp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Droid CLI (by Factory.ai)
   </span>
   
 
@@ -724,9 +851,55 @@
                   
 
 
-  <h1>Opencode</h1>
+<h1 id="opencode-cli">OpenCode CLI<a class="headerlink" href="#opencode-cli" title="Permanent link">&para;</a></h1>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install with npm</span>
+npm<span class="w"> </span>i<span class="w"> </span>-g<span class="w"> </span>opencode-ai
+<span class="c1"># update to latest version with npm</span>
+npm<span class="w"> </span>update<span class="w"> </span>-g<span class="w"> </span>opencode-ai
+</code></pre></div>
+<blockquote>
+<p>via <a href="https://opencode.ai/docs">opencode.ai/docs</a></p>
+</blockquote>
+<h2 id="get-version">Get Version<a class="headerlink" href="#get-version" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>% opencode --version
+0.14.1
+</code></pre></div>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>█▀▀█ █▀▀█ █▀▀ █▀▀▄ █▀▀ █▀▀█ █▀▀▄ █▀▀
+█░░█ █░░█ █▀▀ █░░█ █░░ █░░█ █░░█ █▀▀
+▀▀▀▀ █▀▀▀ ▀▀▀ ▀  ▀ ▀▀▀ ▀▀▀▀ ▀▀▀  ▀▀▀
 
+Commands:
+  opencode [project]           start opencode tui                      [default]
+  opencode attach &lt;server&gt;     attach to a running opencode server
+  opencode run [message..]     run opencode with a message
+  opencode auth                manage credentials
+  opencode agent               manage agents
+  opencode upgrade [target]    upgrade opencode to the latest or a specific
+                               version
+  opencode serve               starts a headless opencode server
+  opencode models              list all available models
+  opencode export [sessionID]  export session data as JSON
+  opencode github              manage GitHub agent
 
+Positionals:
+  project  path to start opencode in                                    [string]
+
+Options:
+      --help        show help                                          [boolean]
+  -v, --version     show version number                                [boolean]
+      --print-logs  print logs to stderr                               [boolean]
+      --log-level   log level
+                            [string] [choices: &quot;DEBUG&quot;, &quot;INFO&quot;, &quot;WARN&quot;, &quot;ERROR&quot;]
+  -m, --model       model to use in the format of provider/model        [string]
+  -c, --continue    continue the last session                          [boolean]
+  -s, --session     session id to continue                              [string]
+  -p, --prompt      prompt to use                                       [string]
+      --agent       agent to use                                        [string]
+      --port        port to listen on                      [number] [default: 0]
+  -h, --hostname    hostname to listen on        [string] [default: &quot;127.0.0.1&quot;]
+</code></pre></div>
 
 
 

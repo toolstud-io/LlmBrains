@@ -6,7 +6,7 @@ import org.jetbrains.plugins.terminal.TerminalToolWindowManager
 object TerminalCommandRunner {
     fun run(project: Project, title: String, command: String) {
         val terminalManager = TerminalToolWindowManager.getInstance(project)
-        val widget = terminalManager.createLocalShellWidget(project.basePath ?: "", title)
+        val widget = terminalManager.createShellWidget(project.basePath ?: "", title)
         widget.executeCommand(command)
     }
 }

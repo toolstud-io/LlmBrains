@@ -16,6 +16,13 @@ data class CodingAgent(
 object CodingAgents {
     val all: List<CodingAgent> = listOf(
         CodingAgent(
+            id = "amp",
+            name = "Amp CLI",
+            command = "amp",
+            installHint = "npm install -g @sourcegraph/amp",
+            updateHint = "npm update --quiet --no-fund -g @sourcegraph/amp",
+        ),
+        CodingAgent(
             id = "claude",
             name = "Claude Code",
             command = "claude",
@@ -30,11 +37,25 @@ object CodingAgents {
             updateHint = "npm update --quiet --no-fund -g @openai/codex",
         ),
         CodingAgent(
+            id = "droid",
+            name = "Droid CLI",
+            command = "droid",
+            installHint = "curl -fsSL https://app.factory.ai/cli | sh",
+            updateHint = "",
+        ),
+        CodingAgent(
             id = "gemini",
             name = "Gemini CLI",
             command = "gemini",
             installHint = "npm install -g @google/gemini-cli",
             updateHint = "npm update --quiet --no-fund -g @google/gemini-cli",
+        ),
+        CodingAgent(
+            id = "goose",
+            name = "Goose CLI",
+            command = "goose",
+            installHint = "curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash",
+            updateHint = "goose update",
         ),
         CodingAgent(
             id = "grok",
@@ -44,6 +65,13 @@ object CodingAgents {
             updateHint = "npm update --quiet --no-fund -g @vibe-kit/grok-cli",
         ),
         CodingAgent(
+            id = "opencode",
+            name = "OpenCode",
+            command = "opencode",
+            installHint = "npm install -g opencode-ai",
+            updateHint = "npm update --quiet --no-fund -g opencode-ai",
+        ),
+        CodingAgent(
             id = "qodo",
             name = "Qodo Command",
             command = "qodo",
@@ -51,11 +79,11 @@ object CodingAgents {
             updateHint = "npm update --quiet --no-fund -g @qodo/command",
         ),
         CodingAgent(
-            id = "opencode",
-            name = "OpenCode",
-            command = "opencode",
-            installHint = "npm install -g opencode-ai",
-            updateHint = "npm update --quiet --no-fund -g opencode-ai",
+            id = "warp",
+            name = "Warp CLI",
+            command = "warp",
+            installHint = "brew tap warpdotdev/warp && brew update && brew install --cask warp-cli",
+            updateHint = "brew upgrade --cask warp-cli",
         ),
     )
 

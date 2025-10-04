@@ -855,18 +855,35 @@
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install with npm</span>
 curl<span class="w"> </span>-fsSL<span class="w"> </span>https://app.factory.ai/cli<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
-<span class="c1"># update to latest version with npm</span>
-npm<span class="w"> </span>update<span class="w"> </span>-g<span class="w"> </span>opencode-ai
 </code></pre></div>
 <blockquote>
 <p>via <a href="https://factory.ai/product/ide">factory.ai/product/ide</a></p>
 </blockquote>
 <h2 id="get-version">Get Version<a class="headerlink" href="#get-version" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>% droid --version
-0.14.1
+0.18.2
 </code></pre></div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>
+<div class="highlight"><pre><span></span><code>Usage: droid [options] [command]
+
+Droid - Factory&#39;s AI coding agent in your terminal
+
+Options:
+  -v, --version            output the version number
+  -h, --help               display help for command
+
+Commands:
+  exec [options] [prompt]  Execute a single command (non-interactive mode)
+
+Running &#39;droid&#39; without any options starts interactive mode.
+
+Examples:
+  droid                               Start interactive mode (default)
+  droid exec &quot;analyze this file&quot;      Run non-interactively (for scripts/automation)
+  droid exec - &lt; prompt.txt           Execute from stdin (non-interactive)
+  droid exec --help                   Show exec command options
+
+For more details, see: https://docs.factory.ai/factory-cli/getting-started/overview
 </code></pre></div>
 
 

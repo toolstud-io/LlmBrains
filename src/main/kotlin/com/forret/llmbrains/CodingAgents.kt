@@ -37,6 +37,13 @@ object CodingAgents {
             updateHint = "npm update --quiet --no-fund -g @google/gemini-cli",
         ),
         CodingAgent(
+            id = "grok",
+            name = "Grok CLI",
+            command = "grok",
+            installHint = "npm install -g @vibe-kit/grok-cli",
+            updateHint = "npm update --quiet --no-fund -g @vibe-kit/grok-cli",
+        ),
+        CodingAgent(
             id = "qodo",
             name = "Qodo Command",
             command = "qodo",

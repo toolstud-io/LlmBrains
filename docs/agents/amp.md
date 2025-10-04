@@ -1,4 +1,4 @@
-# Droid CLI (by Factory.ai)
+# Amp CLI (by SourceGraph)
 
 ## Installation
 

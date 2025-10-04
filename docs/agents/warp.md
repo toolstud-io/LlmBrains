@@ -1,4 +1,4 @@
-# Droid CLI (by Factory.ai)
+# Warp CLI
 
 ## Installation
 

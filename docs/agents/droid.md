@@ -1,4 +1,4 @@
-# Droid CLI (by Factory.ai)
+# Droid CLI - by Factory.ai
 
 ## Installation
 

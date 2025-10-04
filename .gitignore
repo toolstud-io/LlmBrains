@@ -3,6 +3,7 @@
 /.cache/
 /.claude/
 /.gradle/
+/.grok/
 /.idea/
 /.intellijPlatform/
 /.kotlin/

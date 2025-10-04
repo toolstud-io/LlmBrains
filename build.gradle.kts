@@ -41,6 +41,7 @@ tasks {
             Adds a toolbar button (🫴) with options and a check to see what is installed.
             """.trimIndent()
         )
+        changeNotes.set("Added Grok, Droid, Warp CLI agents")
     }
 
     // Ensure `./gradlew build` also produces the plugin ZIP

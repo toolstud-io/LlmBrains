@@ -13,8 +13,8 @@ repositories {
 }
 
 intellij {
-    // Build against IntelliJ IDEA 2023.1 (231.*) so the plugin stays compatible with all IDEs released in the last two years.
-    version.set("2023.1")
+    // Build against IntelliJ IDEA 2025.1 (251.*) to match our sinceBuild and use the new Terminal services API.
+    version.set("2025.1")
     type.set("IC")
     // Only require the built-in Terminal plugin so every JetBrains IDE with a terminal can load us.
     plugins.set(listOf("org.jetbrains.plugins.terminal"))

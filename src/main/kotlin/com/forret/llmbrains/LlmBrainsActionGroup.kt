@@ -29,10 +29,10 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         // Settings | LLM Brains
             ShowSettingsUtil.getInstance().showSettingsDialog(project, "LLM Brains")
         }
-        actions += SimpleRunAction("👍 Check all versions") {
-            project?.let { TerminalCommandRunner.run(it, "👍 Check Agents", buildCheckScript()) }
+        actions += SimpleRunAction("🤔 Check all CLI versions") {
+            project?.let { TerminalCommandRunner.run(it, "🤔 Check Agents", buildCheckScript()) }
         }
-        actions += SimpleRunAction("🤞 Update all agents") {
+        actions += SimpleRunAction("🤞 Update all CLI agents") {
             project?.let { TerminalCommandRunner.run(it, "🤞 Update Agents", buildUpdateScript(activeAgents)) }
         }
         actions += Separator.getInstance()

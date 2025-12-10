@@ -1,10 +1,14 @@
 package com.forret.llmbrains
 
+import com.intellij.ide.BrowserUtil
 import com.intellij.openapi.options.Configurable
 import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.components.JBLabel
-import java.awt.Component
+import com.intellij.ui.components.labels.LinkLabel
+import com.intellij.ui.components.labels.LinkListener
 import java.awt.BorderLayout
+import java.awt.Component
+import java.net.URI
 import javax.swing.Box
 import javax.swing.BoxLayout
 import javax.swing.JComponent
@@ -21,12 +25,28 @@ class AgentSettingsConfigurable : Configurable {
             content.layout = BoxLayout(content, BoxLayout.Y_AXIS)
             content.add(JBLabel("Select which coding agents should appear in the toolbar dropdown."))
             content.add(Box.createVerticalStrut(8))
-            checkboxes.values.forEach { checkBox ->
+            CodingAgents.all.forEach { agent ->
+                val row = JPanel()
+                row.layout = BoxLayout(row, BoxLayout.X_AXIS)
+                val checkBox = checkboxes[agent.id]!!
                 checkBox.alignmentX = Component.LEFT_ALIGNMENT
-                content.add(checkBox)
+                row.add(checkBox)
+                row.add(Box.createHorizontalStrut(8))
+                val domain = extractDomain(agent.url)
+                val link = LinkLabel<Any>(domain, null)
+                link.setListener(LinkListener { _, _ -> BrowserUtil.browse(agent.url) }, null)
+                row.add(link)
+                row.alignmentX = Component.LEFT_ALIGNMENT
+                content.add(row)
             }
             add(content, BorderLayout.NORTH)
         }
+    }
+
+    private fun extractDomain(url: String): String = try {
+        URI(url).host?.removePrefix("www.") ?: url
+    } catch (_: Exception) {
+        url
     }
 
     override fun createComponent(): JComponent {

@@ -33,8 +33,8 @@ tasks {
     patchPluginXml {
         // 231 corresponds to the 2023.1 release family; newer IDEs remain compatible without an explicit upper bound.
         sinceBuild.set("251")
-        // The latest version of any IDE in the 2023.1 release family is 231.*; we want to stay compatible with all IDEs released in the last two years.
-        untilBuild.set("252.*")
+        // Support up to 2025.3 release family (253.*) for PHPStorm 2025.3 and other recent IDEs.
+        untilBuild.set("253.*")
         pluginDescription.set(
             """
             LLM Brains: open popular CLI coding agents (Claude, Codex, Gemini ...) in an IDE terminal.

@@ -16,25 +16,29 @@
 ## Features
 
 - **One-click access** to CLI coding agents from the IDE toolbar (🫴 icon)
-- **10 supported agents** with auto-detection of installed tools
+- **14 supported agents** with auto-detection of installed tools
 - **Check & Update utilities** to manage all agents at once
 - **Configurable** - enable/disable agents via Settings > Tools > LLM Brains
 - **Cross-platform** - works on macOS, Linux, and Windows
 
 ## Supported CLI Agents
 
-| Agent                                                                        | Command    | Provider    | Installation                                                                                 |
-|------------------------------------------------------------------------------|------------|-------------|----------------------------------------------------------------------------------------------|
-| [Amp CLI](https://ampcode.com/manual#getting-started-command-line-interface) | `amp`      | Sourcegraph | `npm install -g @sourcegraph/amp`                                                            |
-| [Claude Code](https://docs.claude.com/en/docs/claude-code/setup)             | `claude`   | Anthropic   | `npm install -g @anthropic-ai/claude-code`                                                   |
-| [Codex CLI](https://developers.openai.com/codex/cli/)                        | `codex`    | OpenAI      | `npm install -g @openai/codex`                                                               |
-| [Droid CLI](https://factory.ai/product/ide)                                  | `droid`    | Factory AI  | `curl -fsSL https://app.factory.ai/cli \| sh`                                                |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli)                    | `gemini`   | Google      | `npm install -g @google/gemini-cli`                                                          |
-| [Goose CLI](https://github.com/block/goose)                                  | `goose`    | Block       | `curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh \| bash` |
-| [Grok CLI](https://github.com/superagent-ai/grok-cli)                        | `grok`     | xAI         | `npm install -g @vibe-kit/grok-cli`                                                          |
-| [OpenCode](https://opencode.ai/docs)                                         | `opencode` | OpenCode AI | `npm install -g opencode-ai`                                                                 |
-| [Qodo](https://qodo.ai/)                                                     | `qodo`     | Qodo        | `npm install -g @qodo/command`                                                               |
-| [Warp CLI](https://docs.warp.dev/developers/cli)                             | `warp`     | Warp        | `brew install --cask warp-cli`                                                               |
+| Agent                                                                         | Command    | Provider    | Installation                                              |
+|-------------------------------------------------------------------------------|------------|-------------|-----------------------------------------------------------|
+| [Amp CLI](https://ampcode.com/manual#getting-started-command-line-interface)  | `amp`      | Sourcegraph | `npm install -g @sourcegraph/amp`                         |
+| [Claude Code](https://docs.claude.com/en/docs/claude-code/setup)              | `claude`   | Anthropic   | `npm install -g @anthropic-ai/claude-code`                |
+| [Codex CLI](https://developers.openai.com/codex/cli/)                         | `codex`    | OpenAI      | `npm install -g @openai/codex`                            |
+| [Copilot CLI](https://github.com/features/copilot/cli)                        | `copilot`  | GitHub      | `npm install -g @github/copilot`                          |
+| [Crush CLI](https://github.com/charmbracelet/crush/)                          | `crush`    | Charm       | `npm install -g @charmland/crush`                         |
+| [Droid CLI](https://factory.ai/product/ide)                                   | `droid`    | Factory AI  | `curl -fsSL https://app.factory.ai/cli \| sh`             |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli)                     | `gemini`   | Google      | `npm install -g @google/gemini-cli`                       |
+| [Goose CLI](https://github.com/block/goose)                                   | `goose`    | Block       | `curl -fsSL https://.../download_cli.sh \| bash`          |
+| [Grok CLI](https://github.com/superagent-ai/grok-cli)                         | `grok`     | xAI         | `npm install -g @vibe-kit/grok-cli`                       |
+| [OpenCode](https://opencode.ai/docs)                                          | `opencode` | OpenCode AI | `npm install -g opencode-ai`                              |
+| [Qodo](https://qodo.ai/)                                                      | `qodo`     | Qodo        | `npm install -g @qodo/command`                            |
+| [Qwen Code](https://qwenlm.github.io/qwen-code-docs/en/)                      | `qwen`     | Alibaba     | `npm install -g @qwen-code/qwen-code@latest`              |
+| [VT Code](https://github.com/vinhnx/vtcode)                                   | `vtcode`   | vinhnx      | `npm install -g @vinhnx/vtcode`                           |
+| [Warp CLI](https://docs.warp.dev/developers/cli)                              | `warp`     | Warp        | `brew install --cask warp-cli`                            |
 
 ## Usage
 

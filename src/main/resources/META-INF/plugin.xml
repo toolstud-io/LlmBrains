@@ -7,9 +7,9 @@
         Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal.
     </description>
     <change-notes>
-        <p>0.4.3 — 2025-10-04</p>
+        <p>0.4.8 — 2025-12-10</p>
         <ul>
-            <li>Added Grok/Droid/... as coding agent</li>
+            <li>Added Copilot/Charm/... as coding agent - fixed problem with Classic UI</li>
         </ul>
     </change-notes>
     <depends>com.intellij.modules.platform</depends>
@@ -19,9 +19,12 @@
     </extensions>
     <actions>
         <group id="com.forret.llmbrains.Dropdown" class="com.forret.llmbrains.LlmBrainsActionGroup"
-               text="🫴" description="Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal." popup="true"
+               text="LLM Brains" description="Open popular CLI coding agents (Claude, Codex, Gemini) in an IDE terminal." popup="true"
                icon="/icons/palm-up-hand-noto.svg">
+            <!-- New UI toolbar (2022.3+) -->
             <add-to-group group-id="MainToolbarRight" anchor="last"/>
+            <!-- Classic UI: Navigation bar toolbar -->
+            <add-to-group group-id="NavBarToolBar" anchor="last"/>
         </group>
     </actions>
 </idea-plugin>

@@ -22,4 +22,6 @@ When you click on it, it gives you the following options:
 * "Qodo Command" ⇒ run 'qodo' in an IDE terminal window with title '🫴 Qodo'
 * "Check what's installed" ⇒ run a bash script in an IDE terminal window: for each of the CLI programs above: if it's installed, show the version. If it's not, show how to install it.
 
-<iframe width="384px" height="319px" src="https://plugins.jetbrains.com/embeddable/card/28522"></iframe>
+<div id="jetbrains"></div>
+<script src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"></script>
+<script> MarketplaceWidget.setupMarketplaceWidget('card', 28522, "#jetbrains"); </script>

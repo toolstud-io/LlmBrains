@@ -298,6 +298,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -307,6 +318,88 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-cli-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported CLI Agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Agent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -440,6 +533,48 @@
   
   
     <li class="md-nav__item">
+      <a href="agents/copilot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copilot CLI - by GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agents/crush/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crush CLI - by Charm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="agents/droid/" class="md-nav__link">
         
   
@@ -466,6 +601,27 @@
   
   <span class="md-ellipsis">
     Gemini CLI - by Google
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agents/goose/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Goose CLI - by Block
   </span>
   
 
@@ -529,6 +685,48 @@
   
   <span class="md-ellipsis">
     Qodo CLI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agents/qwen/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qwen Code - by Alibaba
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agents/vtcode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VT Code - by vinhnx
   </span>
   
 
@@ -791,20 +989,153 @@
 <img alt="GitHub Release" src="https://img.shields.io/github/v/release/toolstud-io/LlmBrains" />
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/toolstud-io/LlmBrains" />
 <img alt="JetBrains Plugin Version" src="https://img.shields.io/jetbrains/plugin/v/28522" />
-<img alt="JetBrains Plugin Downloads" src="https://img.shields.io/jetbrains/plugin/d/28522" /></p>
+<img alt="JetBrains Plugin Downloads" src="https://img.shields.io/jetbrains/plugin/d/28522?logo=jetbrains" /></p>
 <h1 id="llm-brains">LLM Brains<a class="headerlink" href="#llm-brains" title="Permanent link">&para;</a></h1>
-<p>"LLM Brains" is a JetBrains IDE plugin (for e.g. usage in PhpStorm) to open any (popular) CLI coding agent in a new terminal window.
-Tested with PhpStorm 2025.2.1 (Build #PS-252.25557.128) and requires the 252.* platform family.
-It's like the Claude Code button but also provides OpenAI Codex and Google's Gemini CLI, and maybe more in the future.</p>
+<p><a href="https://plugins.jetbrains.com/plugin/28522-llm-brains"><img alt="JetBrains Plugin Downloads" src="https://img.shields.io/jetbrains/plugin/d/28522?style=for-the-badge&amp;logo=jetbrains" /></a></p>
+<p><strong>LLM Brains</strong> is a JetBrains IDE plugin that adds a toolbar button to launch popular <strong>CLI coding agents</strong> directly in your IDE terminal. Works with all JetBrains IDEs (IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, etc.).</p>
 <p><img alt="img.png" src="dropdown.png" /></p>
-<p>It shows the 🫴 icon in the top right corner of the IDE.
-When you click on it, it gives you the following options:</p>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
-<li>"Claude Code" ⇒ run 'claude' in an IDE terminal window with title '🫴 Claude'</li>
-<li>"Codex CLI" ⇒ run 'codex' in an IDE terminal window with title '🫴 Codex'</li>
-<li>"Gemini CLI" ⇒ run 'gemini' in an IDE terminal window with title '🫴 Gemini'</li>
-<li>"Qodo Command" ⇒ run 'qodo' in an IDE terminal window with title '🫴 Qodo'</li>
-<li>"Check what's installed" ⇒ run a bash script in an IDE terminal window: for each of the CLI programs above: if it's installed, show the version. If it's not, show how to install it.</li>
+<li><strong>One-click access</strong> to CLI coding agents from the IDE toolbar (🫴 icon)</li>
+<li><strong>14 built-in agents</strong> with auto-detection of installed tools</li>
+<li><strong>Custom agent support</strong> - add your own CLI tool with configurable name, command, and URL</li>
+<li><strong>Check &amp; Update utilities</strong> to manage all agents at once</li>
+<li><strong>Configurable</strong> - enable/disable agents via Settings &gt; Tools &gt; LLM Brains</li>
+<li><strong>Cross-platform</strong> - works on macOS, Linux, and Windows</li>
+</ul>
+<h2 id="supported-cli-agents">Supported CLI Agents<a class="headerlink" href="#supported-cli-agents" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Command</th>
+<th>Provider</th>
+<th>Installation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://ampcode.com/manual#getting-started-command-line-interface">Amp CLI</a></td>
+<td><code>amp</code></td>
+<td>Sourcegraph</td>
+<td><code>npm install -g @sourcegraph/amp</code></td>
+</tr>
+<tr>
+<td><a href="https://docs.claude.com/en/docs/claude-code/setup">Claude Code</a></td>
+<td><code>claude</code></td>
+<td>Anthropic</td>
+<td><code>npm install -g @anthropic-ai/claude-code</code></td>
+</tr>
+<tr>
+<td><a href="https://developers.openai.com/codex/cli/">Codex CLI</a></td>
+<td><code>codex</code></td>
+<td>OpenAI</td>
+<td><code>npm install -g @openai/codex</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/features/copilot/cli">Copilot CLI</a></td>
+<td><code>copilot</code></td>
+<td>GitHub</td>
+<td><code>npm install -g @github/copilot</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/charmbracelet/crush/">Crush CLI</a></td>
+<td><code>crush</code></td>
+<td>Charm</td>
+<td><code>npm install -g @charmland/crush</code></td>
+</tr>
+<tr>
+<td><a href="https://factory.ai/product/ide">Droid CLI</a></td>
+<td><code>droid</code></td>
+<td>Factory AI</td>
+<td><code>curl -fsSL https://app.factory.ai/cli \| sh</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a></td>
+<td><code>gemini</code></td>
+<td>Google</td>
+<td><code>npm install -g @google/gemini-cli</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/block/goose">Goose CLI</a></td>
+<td><code>goose</code></td>
+<td>Block</td>
+<td><code>curl -fsSL https://.../download_cli.sh \| bash</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/superagent-ai/grok-cli">Grok CLI</a></td>
+<td><code>grok</code></td>
+<td>xAI</td>
+<td><code>npm install -g @vibe-kit/grok-cli</code></td>
+</tr>
+<tr>
+<td><a href="https://opencode.ai/docs">OpenCode</a></td>
+<td><code>opencode</code></td>
+<td>OpenCode AI</td>
+<td><code>npm install -g opencode-ai</code></td>
+</tr>
+<tr>
+<td><a href="https://qodo.ai/">Qodo</a></td>
+<td><code>qodo</code></td>
+<td>Qodo</td>
+<td><code>npm install -g @qodo/command</code></td>
+</tr>
+<tr>
+<td><a href="https://qwenlm.github.io/qwen-code-docs/en/">Qwen Code</a></td>
+<td><code>qwen</code></td>
+<td>Alibaba</td>
+<td><code>npm install -g @qwen-code/qwen-code@latest</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/vinhnx/vtcode">VT Code</a></td>
+<td><code>vtcode</code></td>
+<td>vinhnx</td>
+<td><code>npm install -g @vinhnx/vtcode</code></td>
+</tr>
+<tr>
+<td><a href="https://docs.warp.dev/developers/cli">Warp CLI</a></td>
+<td><code>warp</code></td>
+<td>Warp</td>
+<td><code>brew install --cask warp-cli</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-agent">Custom Agent<a class="headerlink" href="#custom-agent" title="Permanent link">&para;</a></h2>
+<p>In addition to the built-in agents, you can configure your own custom CLI agent:</p>
+<ol>
+<li>Go to <strong>Settings/Preferences &gt; Tools &gt; LLM Brains</strong></li>
+<li>Enable the <strong>Custom Agent</strong> checkbox</li>
+<li>Configure:</li>
+<li><strong>Name</strong>: Display name shown in the dropdown (e.g., "My Agent")</li>
+<li><strong>Command</strong>: The CLI command to execute (e.g., <code>myagent</code>)</li>
+<li><strong>URL</strong>: Documentation URL for reference</li>
+</ol>
+<p>Your custom agent will appear in the dropdown menu alongside the built-in agents.</p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>Click the 🫴 icon in the top right corner of the IDE to access:</p>
+<ul>
+<li><strong>Agent actions</strong> - Launch any enabled agent in a new terminal tab</li>
+<li><strong>Check what's installed</strong> - Shows version info for all agents (or install hints for missing ones)</li>
+<li><strong>Update all agents</strong> - Updates all enabled agents to their latest versions</li>
+</ul>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open your JetBrains IDE</li>
+<li>Go to <strong>Settings/Preferences &gt; Plugins &gt; Marketplace</strong></li>
+<li>Search for "LLM Brains"</li>
+<li>Click <strong>Install</strong> and restart the IDE</li>
+</ol>
+<p>Or install from the <a href="https://plugins.jetbrains.com/plugin/28522-llm-brains">JetBrains Marketplace</a>.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>Go to <strong>Settings/Preferences &gt; Tools &gt; LLM Brains</strong> to:</p>
+<ul>
+<li>Enable or disable specific built-in agents in the dropdown menu</li>
+<li>Configure a custom agent with your own CLI tool</li>
+</ul>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<ul>
+<li>JetBrains IDE 2024.1+ (platform version 251, 252, 253)</li>
+<li>Terminal plugin (bundled with all JetBrains IDEs)</li>
 </ul>
 
 

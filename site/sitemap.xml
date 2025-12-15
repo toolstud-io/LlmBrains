@@ -2,66 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/docker/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/amp/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/claude/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/codex/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
+    </url>
+    <url>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/copilot/</loc>
+         <lastmod>2025-12-15</lastmod>
+    </url>
+    <url>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/crush/</loc>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/droid/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/gemini/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
+    </url>
+    <url>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/goose/</loc>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/grok/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/opencode/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/qodo/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
+    </url>
+    <url>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/qwen/</loc>
+         <lastmod>2025-12-15</lastmod>
+    </url>
+    <url>
+         <loc>https://toolstud-io.github.io/LlmBrains/agents/vtcode/</loc>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/agents/warp/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/blog/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/blog/2025/10/v037/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/blog/2025/10/v045/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
+    </url>
+    <url>
+         <loc>https://toolstud-io.github.io/LlmBrains/blog/2025/12/v050---custom-agent-support/</loc>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/blog/archive/2025/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
     <url>
          <loc>https://toolstud-io.github.io/LlmBrains/blog/category/release/</loc>
-         <lastmod>2025-10-04</lastmod>
+         <lastmod>2025-12-15</lastmod>
     </url>
 </urlset>

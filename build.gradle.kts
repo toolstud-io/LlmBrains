@@ -49,7 +49,7 @@ dependencies {
 
 tasks {
     patchPluginXml {
-        // 231 corresponds to the 2023.1 release family; newer IDEs remain compatible without an explicit upper bound.
+        // 251 corresponds to the 2025.1 release family; newer IDEs remain compatible without an explicit upper bound.
         sinceBuild.set("251")
         // Support up to 2025.3 release family (253.*) for PHPStorm 2025.3 and other recent IDEs.
         untilBuild.set("253.*")

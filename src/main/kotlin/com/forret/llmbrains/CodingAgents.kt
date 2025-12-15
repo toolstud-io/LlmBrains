@@ -114,7 +114,7 @@ object CodingAgents {
         ),
         CodingAgent(
             id = "vtcode",
-            name = "VT COde",
+            name = "VT Code",
             command = "vtcode",
             installHint = "npm install -g @vinhnx/vtcode --registry=https://npm.pkg.github.com",
             updateHint = "npm update --quiet --no-fund -g @vinhnx/vtcode --registry=https://npm.pkg.github.com",

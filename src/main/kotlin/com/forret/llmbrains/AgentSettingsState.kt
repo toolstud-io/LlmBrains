@@ -35,6 +35,10 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
         }
     }
 
+    fun enableAllAgents() {
+        state.inactiveAgentIds.clear()
+    }
+
     fun activeAgents(): List<CodingAgent> = CodingAgents.all.filter { isAgentActive(it.id) }
 
     fun getCustomAgent(): CodingAgent? {

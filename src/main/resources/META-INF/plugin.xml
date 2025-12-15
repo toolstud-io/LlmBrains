@@ -15,6 +15,7 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="LLM Brains" displayType="BALLOON"/>
         <applicationConfigurable instance="com.forret.llmbrains.AgentSettingsConfigurable" displayName="LLM Brains"/>
     </extensions>
     <actions>

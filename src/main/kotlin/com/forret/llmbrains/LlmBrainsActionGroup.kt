@@ -1,13 +1,15 @@
 package com.forret.llmbrains
 
+import com.intellij.ide.plugins.PluginManagerCore
+import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.Separator
-import com.intellij.openapi.project.DumbAware
-import com.intellij.openapi.options.ShowSettingsUtil
-import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.extensions.PluginId
+import com.intellij.openapi.options.ShowSettingsUtil
+import com.intellij.openapi.project.DumbAware
 
 class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agent in a new terminal window.", null), DumbAware {
     override fun getChildren(e: AnActionEvent?): Array<AnAction> {
@@ -42,6 +44,14 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         }
         actions += SimpleRunAction("🤔 Check all CLI versions") {
             project?.let { TerminalCommandRunner.run(it, "🤔 Check Agents", buildCheckScript()) }
+        }
+        actions += SimpleRunAction("🔍 Auto-detect installed agents") {
+            val (enabled, total) = AgentDetector.autoDetectAndConfigure()
+            val message = "Found $enabled of $total CLI agents installed"
+            NotificationGroupManager.getInstance()
+                .getNotificationGroup("LLM Brains")
+                .createNotification(message, NotificationType.INFORMATION)
+                .notify(project)
         }
         actions += SimpleRunAction("🤞 Update all CLI agents") {
             project?.let { TerminalCommandRunner.run(it, "🤞 Update Agents", buildUpdateScript(activeAgents)) }

@@ -1,7 +1,6 @@
 package com.forret.llmbrains
 
 import com.intellij.ide.plugins.PluginManagerCore
-import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
@@ -10,6 +9,8 @@ import com.intellij.openapi.actionSystem.Separator
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.DumbAware
+import java.nio.file.Files
+import java.nio.file.Path
 
 class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agent in a new terminal window.", null), DumbAware {
     override fun getChildren(e: AnActionEvent?): Array<AnAction> {
@@ -46,12 +47,21 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             project?.let { TerminalCommandRunner.run(it, "🤔 Check Agents", buildCheckScript()) }
         }
         actions += SimpleRunAction("🔍 Auto-detect installed agents") {
-            val (enabled, total) = AgentDetector.autoDetectAndConfigure()
-            val message = "Found $enabled of $total CLI agents installed"
-            NotificationGroupManager.getInstance()
-                .getNotificationGroup("LLM Brains")
-                .createNotification(message, NotificationType.INFORMATION)
-                .notify(project)
+            project?.let { proj ->
+                val tempFile = Files.createTempFile("llmbrains-detect-", ".txt")
+                val detectCommand = buildDetectScript(tempFile)
+
+                TerminalCommandRunner.run(proj, "🔍 Detecting Agents", detectCommand)
+
+                DetectionResultsWatcher.watchForResults(proj, tempFile) { results ->
+                    val (enabled, total) = DetectionResultsWatcher.applyResults(results)
+                    DetectionResultsWatcher.showNotification(
+                        proj,
+                        "Found $enabled of $total CLI agents installed",
+                        NotificationType.INFORMATION,
+                    )
+                }
+            }
         }
         actions += SimpleRunAction("🤞 Update all CLI agents") {
             project?.let { TerminalCommandRunner.run(it, "🤞 Update Agents", buildUpdateScript(activeAgents)) }
@@ -138,6 +148,47 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         val escapedData = escapeForPowerShell(agentData)
         val escapedIds = escapeForPowerShell(activeIds)
         return """powershell -NoProfile -Command "& '$escapedPath' update-all '$escapedData' '$escapedIds'""""
+    }
+
+    private fun buildDetectScript(outputFile: Path): String {
+        if (OsDetector.isWindows()) {
+            return buildWindowsDetectScript(outputFile)
+        }
+        val scriptPath = LlmBrainsScriptInstaller.bashScriptPath()
+        val agentData = CodingAgents.all.joinToString(separator = "\n") { agent ->
+            val id = escapeForDoubleQuotes(agent.id)
+            val name = escapeForDoubleQuotes(agent.name)
+            val command = escapeForDoubleQuotes(agent.command)
+            val versionArgs = escapeForDoubleQuotes(agent.versionArgs)
+            val installHint = escapeForDoubleQuotes(agent.installHint)
+            "$id|$name|$command|$versionArgs|$installHint"
+        }
+        val outputPath = escapeForDoubleQuotes(outputFile.toString())
+        return """
+            bash -lc '
+            SCRIPT_PATH="${escapeForDoubleQuotes(scriptPath.toString())}"
+            SCRIPT_DIR=$(dirname "${'$'}SCRIPT_PATH")
+            PATH="${'$'}SCRIPT_DIR:${'$'}PATH"
+            llmbrains.sh detect-all "$agentData" "$outputPath"
+            exit
+            '
+        """.trimIndent()
+    }
+
+    private fun buildWindowsDetectScript(outputFile: Path): String {
+        val scriptPath = LlmBrainsScriptInstaller.powershellScriptPath()
+        val agentData = CodingAgents.all.joinToString(separator = "\n") { agent ->
+            val id = escapeForPowerShell(agent.id)
+            val name = escapeForPowerShell(agent.name)
+            val command = escapeForPowerShell(agent.command)
+            val versionArgs = escapeForPowerShell(agent.versionArgs)
+            val installHint = escapeForPowerShell(agent.installHint)
+            "$id|$name|$command|$versionArgs|$installHint"
+        }
+        val escapedPath = escapeForPowerShell(scriptPath.toString())
+        val escapedData = escapeForPowerShell(agentData)
+        val escapedOutput = escapeForPowerShell(outputFile.toString())
+        return """powershell -NoProfile -Command "& '$escapedPath' detect-all '$escapedData' '$escapedOutput'; exit""""
     }
 
     private fun escapeForDoubleQuotes(value: String): String {

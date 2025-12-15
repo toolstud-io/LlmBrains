@@ -27,6 +27,7 @@ Usage:
   llmbrains.sh update <friendly-name> <binary> <update-command> [install-hint]
   llmbrains.sh check-all <agent-definitions-json>
   llmbrains.sh update-all <agent-definitions-json> <active-agent-ids>
+  llmbrains.sh detect-all <agent-definitions-json> <output-file>
 USAGE
 }
 
@@ -147,6 +148,37 @@ case "$subcommand" in
     done
 
     echo "All done."
+    ;;
+  detect-all)
+    if [[ $# -lt 2 ]]; then
+      echo "llmbrains.sh: detect-all requires agent definitions and output file" >&2
+      usage >&2
+      exit 1
+    fi
+    agents_json="$1"
+    output_file="$2"
+
+    clear
+    echo "🔍 Detecting installed CLI coding agents..."; echo
+
+    : > "$output_file"  # clear output file
+
+    echo "$agents_json" | while IFS='|' read -r id name command version_args install_hint; do
+      if [[ -n "$id" ]]; then
+        version_command="$command $version_args"
+        binary="${version_command%% *}"
+
+        if command -v "$binary" >/dev/null 2>&1; then
+          printf "✓ %-16s ${COL_BRIGHT_GREEN}FOUND${COL_RESET}\n" "$name"
+          echo "$id=1" >> "$output_file"
+        else
+          printf "✗ %-16s ${COL_YELLOW}NOT INSTALLED${COL_RESET}\n" "$name"
+          echo "$id=0" >> "$output_file"
+        fi
+      fi
+    done
+
+    echo; echo "Detection complete."
     ;;
   *)
     echo "llmbrains.sh: unknown subcommand '$subcommand'" >&2

@@ -6,6 +6,16 @@ import java.util.concurrent.TimeUnit
 object AgentDetector {
     private const val TIMEOUT_MS = 5000L
 
+    // Common paths where CLI tools are installed on macOS/Linux
+    private val EXTRA_PATHS = listOf(
+        "/opt/homebrew/bin",      // Homebrew on Apple Silicon
+        "/usr/local/bin",         // Homebrew on Intel Mac, common Linux
+        "/home/linuxbrew/.linuxbrew/bin", // Linuxbrew
+        System.getProperty("user.home") + "/.local/bin", // pipx, cargo, etc.
+        System.getProperty("user.home") + "/.cargo/bin", // Rust/cargo
+        System.getProperty("user.home") + "/bin",        // User binaries
+    )
+
     /**
      * Check if a command is available on the system.
      * Uses "command -v" on Unix or "where" on Windows.
@@ -17,9 +27,17 @@ object AgentDetector {
                     .redirectErrorStream(true)
                     .start()
             } else {
-                // Use bash login shell to get full PATH
-                ProcessBuilder("bash", "-lc", "command -v $command")
+                // Build extended PATH with common tool locations
+                val currentPath = System.getenv("PATH") ?: ""
+                val extendedPath = (EXTRA_PATHS + currentPath.split(":")).joinToString(":")
+
+                // Use zsh on macOS (default since Catalina), bash elsewhere
+                val shell = if (OsDetector.isMac()) "zsh" else "bash"
+                ProcessBuilder(shell, "-lc", "command -v $command")
                     .redirectErrorStream(true)
+                    .apply {
+                        environment()["PATH"] = extendedPath
+                    }
                     .start()
             }
 

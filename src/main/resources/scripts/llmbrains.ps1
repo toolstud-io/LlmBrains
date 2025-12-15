@@ -15,6 +15,7 @@ Usage:
   llmbrains.ps1 update <friendly-name> <binary> <update-command> [install-hint]
   llmbrains.ps1 check-all <agent-definitions>
   llmbrains.ps1 update-all <agent-definitions> <active-agent-ids>
+  llmbrains.ps1 detect-all <agent-definitions> <output-file>
 "@
 }
 
@@ -148,6 +149,41 @@ switch ($Subcommand) {
         }
 
         Write-Host "All done."
+    }
+
+    "detect-all" {
+        if ($Arguments.Count -lt 2) {
+            Write-Error "detect-all requires agent definitions and output file"
+            Show-Usage
+            exit 1
+        }
+        $agentsData = $Arguments[0]
+        $outputFile = $Arguments[1]
+
+        Clear-Host
+        Write-Host "Detecting installed CLI coding agents...`n"
+
+        # Clear output file
+        "" | Out-File -FilePath $outputFile -Encoding UTF8
+
+        $agentsData -split "`n" | ForEach-Object {
+            $parts = $_ -split '\|', 5
+            if ($parts.Count -ge 3 -and $parts[0]) {
+                $id = $parts[0]
+                $name = $parts[1]
+                $command = $parts[2]
+
+                if (Get-Command $command -ErrorAction SilentlyContinue) {
+                    Write-Host "- $name FOUND"
+                    "$id=1" | Out-File -FilePath $outputFile -Append -Encoding UTF8
+                } else {
+                    Write-Host "( $name NOT INSTALLED )"
+                    "$id=0" | Out-File -FilePath $outputFile -Append -Encoding UTF8
+                }
+            }
+        }
+
+        Write-Host "`nDetection complete."
     }
 
     default {

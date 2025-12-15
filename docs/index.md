@@ -9,7 +9,9 @@
 
 [![JetBrains Plugin Downloads](https://img.shields.io/jetbrains/plugin/d/28522?style=for-the-badge&logo=jetbrains)](https://plugins.jetbrains.com/plugin/28522-llm-brains)
 
-**LLM Brains** is a JetBrains IDE plugin that adds a toolbar button to launch popular **CLI coding agents** directly in your IDE terminal. Works with all JetBrains IDEs (IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, etc.).
+[plugins.jetbrains.com/plugin/28522-llm-brains](https://plugins.jetbrains.com/plugin/28522-llm-brains)
+
+**LLM Brains** is a JetBrains IDE plugin that adds a toolbar button to launch popular **CLI coding agents** directly in their own IDE terminal window. Works with all JetBrains IDEs (IntelliJ IDEA, PhpStorm, WebStorm, PyCharm, etc.).
 
 ![img.png](dropdown.png)
 

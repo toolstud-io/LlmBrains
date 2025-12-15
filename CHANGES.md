@@ -1,3 +1,4 @@
+- `0.5.1`: auto-detect installed CLI coding agents
 - `0.5.0`: Added custom agent support: configure your own CLI tool with Name, Command, and URL
 - `0.4.8`: Added Crush, VT Code agents
 - `0.4.6`: Added Grok, Droid, Warp CLI agents

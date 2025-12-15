@@ -11,6 +11,10 @@ import com.intellij.openapi.components.Service
 class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
     data class State(
         var inactiveAgentIds: MutableList<String> = mutableListOf(),
+        var customAgentEnabled: Boolean = false,
+        var customAgentName: String = "",
+        var customAgentCommand: String = "",
+        var customAgentUrl: String = "",
     )
 
     private var state: State = State()
@@ -32,6 +36,21 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
     }
 
     fun activeAgents(): List<CodingAgent> = CodingAgents.all.filter { isAgentActive(it.id) }
+
+    fun getCustomAgent(): CodingAgent? {
+        if (!state.customAgentEnabled || state.customAgentName.isBlank() || state.customAgentCommand.isBlank()) {
+            return null
+        }
+        return CodingAgent(
+            id = "custom",
+            name = state.customAgentName.trim(),
+            command = state.customAgentCommand.trim(),
+            versionArgs = "--version",
+            installHint = "",
+            updateHint = "",
+            url = state.customAgentUrl.trim().ifBlank { "https://example.com" },
+        )
+    }
 
     companion object {
         fun getInstance(): AgentSettingsState = service()

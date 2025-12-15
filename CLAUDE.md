@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-LLM Brains is a JetBrains IDE plugin that adds a toolbar button (🫴) to launch popular CLI coding agents (Claude, Codex, Gemini, Qodo) in IDE terminal windows. It targets platform family 251-252.* and requires IntelliJ Platform 2023.1+ with the built-in Terminal plugin.
+LLM Brains is a JetBrains IDE plugin that adds a toolbar button (🫴) to launch popular CLI coding agents (Claude, Codex, Gemini, Qodo) in IDE terminal windows. It targets platform family 251-253.* and requires IntelliJ Platform 2023.1+ with the built-in Terminal plugin.
 
 ## Build & Development Commands
 

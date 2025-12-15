@@ -20,11 +20,22 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
                 project?.let { TerminalCommandRunner.run(it, "🫴 " + agent.name, agent.command) }
             }
         }
-        if (activeAgents.isNotEmpty()) {
+
+        // Add custom agent if enabled
+        val customAgent = settings.getCustomAgent()
+        if (customAgent != null) {
+            if (activeAgents.isNotEmpty()) {
+                actions += Separator.getInstance()
+            }
+            actions += SimpleRunAction(customAgent.dropdownLabel) {
+                project?.let { TerminalCommandRunner.run(it, "🫴 " + customAgent.name, customAgent.command) }
+            }
+        }
+
+        // Open IDE Settings > Tools > LLM Tools to enable/disable providers
+        if (activeAgents.isNotEmpty() || customAgent != null) {
             actions += Separator.getInstance()
         }
-        // Open IDE Settings > Tools > LLM Tools to enable/disable providers
-        actions += Separator.getInstance()
         actions += SimpleRunAction("🤌 Enable/Disable agents") {
         // Settings | LLM Brains
             ShowSettingsUtil.getInstance().showSettingsDialog(project, "LLM Brains")

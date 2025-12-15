@@ -1,6 +1,24 @@
+import org.commonmark.parser.Parser
+import org.commonmark.renderer.html.HtmlRenderer
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.commonmark:commonmark:0.22.0")
+    }
+}
+
 plugins {
     kotlin("jvm") version "2.1.0"
     id("org.jetbrains.intellij") version "1.17.3"
+}
+
+fun markdownToHtml(markdown: String): String {
+    val parser = Parser.builder().build()
+    val renderer = HtmlRenderer.builder().build()
+    return renderer.render(parser.parse(markdown))
 }
 
 group = "com.forret"
@@ -41,7 +59,7 @@ tasks {
             Adds a toolbar button (🫴) with options and a check to see what is installed.
             """.trimIndent()
         )
-        changeNotes.set("Added Grok, Droid, Warp CLI agents")
+        changeNotes.set(markdownToHtml(file("CHANGES.md").readText()))
     }
 
     // Ensure `./gradlew build` also produces the plugin ZIP

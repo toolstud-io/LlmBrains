@@ -1,6 +1,6 @@
 package com.forret.llmbrains
 
-import com.intellij.ide.plugins.PluginManagerCore
+import com.intellij.ide.plugins.PluginManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
@@ -209,7 +209,7 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
     }
 
     private fun getPluginVersion(): String {
-        val plugin = PluginManagerCore.getPlugin(PluginId.getId("com.forret.llmbrains"))
+        val plugin = PluginManager.getInstance().findEnabledPlugin(PluginId.getId("com.forret.llmbrains"))
         return plugin?.version ?: "dev"
     }
 

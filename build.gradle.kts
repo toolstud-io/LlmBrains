@@ -51,8 +51,8 @@ tasks {
     patchPluginXml {
         // 251 corresponds to the 2025.1 release family; newer IDEs remain compatible without an explicit upper bound.
         sinceBuild.set("251")
-        // Support up to 2026.1 release family (261.*) for PhpStorm 2026.1 and other recent IDEs.
-        untilBuild.set("261.*")
+        // Support up to 2026.2 release family (262.*) for PhpStorm 2026.2 and other recent IDEs.
+        untilBuild.set("262.*")
         pluginDescription.set(
             """
             LLM Brains: open popular CLI coding agents (Claude, Codex, Gemini ...) in an IDE terminal.

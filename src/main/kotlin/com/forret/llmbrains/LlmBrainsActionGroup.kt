@@ -119,7 +119,8 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             val versionArgs = escapeForDoubleQuotes(agent.versionArgs)
             val installHint = escapeForDoubleQuotes(agent.installHint)
             val updateHint = escapeForDoubleQuotes(agent.updateHint)
-            "$id|$name|$command|$versionArgs|$installHint|$updateHint"
+            // installHint goes last: it may contain '|' (e.g. "curl ... | bash") and only the last field keeps embedded pipes
+            "$id|$name|$command|$versionArgs|$updateHint|$installHint"
         }
         val activeIds = agents.joinToString(",") { it.id }
         return """
@@ -141,7 +142,8 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             val versionArgs = escapeForPowerShell(agent.versionArgs)
             val installHint = escapeForPowerShell(agent.installHint)
             val updateHint = escapeForPowerShell(agent.updateHint)
-            "$id|$name|$command|$versionArgs|$installHint|$updateHint"
+            // llmbrains.ps1 update-all expects updateHint at index 4 and installHint last (keeps embedded pipes)
+            "$id|$name|$command|$versionArgs|$updateHint|$installHint"
         }
         val activeIds = agents.joinToString(",") { it.id }
         val escapedPath = escapeForPowerShell(scriptPath.toString())

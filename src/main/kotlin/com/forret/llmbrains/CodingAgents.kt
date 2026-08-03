@@ -25,6 +25,14 @@ object CodingAgents {
             url = "https://ampcode.com/manual#getting-started-command-line-interface",
         ),
         CodingAgent(
+            id = "antigravity",
+            name = "Antigravity CLI",
+            command = "agy",
+            installHint = "curl -fsSL https://antigravity.google/cli/install.sh | bash",
+            updateHint = "",
+            url = "https://antigravity.google/docs/cli/install",
+        ),
+        CodingAgent(
             id = "claude",
             name = "Claude Code",
             command = "claude",
@@ -66,7 +74,7 @@ object CodingAgents {
         ),
         CodingAgent(
             id = "gemini",
-            name = "Gemini CLI",
+            name = "Gemini CLI (enterprise only)",
             command = "gemini",
             installHint = "npm install -g @google/gemini-cli",
             updateHint = "npm update --quiet --no-fund -g @google/gemini-cli",

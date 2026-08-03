@@ -1,3 +1,4 @@
+- `0.5.5`: added Antigravity CLI (Gemini CLI successor); marked Gemini CLI as enterprise-only; fixed "update all" running the wrong command on Windows and with pipe-containing install hints
 - `0.5.4`: support for 2026.2 versions of IDE
 - `0.5.3`: support for 2026.1 versions of IDE
 - `0.5.1`: auto-detect installed CLI coding agents

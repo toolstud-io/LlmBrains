@@ -141,7 +141,8 @@ case "$subcommand" in
     clear
     echo "Updating enabled coding agents..."; echo
 
-    echo "$agents_json" | while IFS='|' read -r id name command version_args install_hint update_hint; do
+    # install_hint is last on purpose: read gives the last variable the remainder, so hints with '|' stay intact
+    echo "$agents_json" | while IFS='|' read -r id name command version_args update_hint install_hint; do
       if [[ -n "$id" ]] && [[ ",$active_ids," == *",$id,"* ]]; then
         "$0" update "$name" "$command" "$update_hint" "$install_hint"
       fi

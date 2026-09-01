@@ -5,6 +5,7 @@ import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.actionSystem.Separator
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.options.ShowSettingsUtil
@@ -41,40 +42,56 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             }
         }
 
-        // Open IDE Settings > Tools > LLM Tools to enable/disable providers
+        // All settings/maintenance actions live in a single submenu
         if (activeAgents.isNotEmpty() || customAgent != null) {
             actions += Separator.getInstance()
         }
-        actions += SimpleRunAction("🤌 Enable/Disable agents") {
-        // Settings | LLM Brains
-            ShowSettingsUtil.getInstance().showSettingsDialog(project, "LLM Brains")
-        }
-        actions += SimpleRunAction("🤔 Check all CLI versions") {
-            project?.let { TerminalCommandRunner.run(it, "🤔 Check Agents", buildCheckScript()) }
-        }
-        actions += SimpleRunAction("🔍 Auto-detect installed agents") {
-            project?.let { proj ->
-                val tempFile = Files.createTempFile("llmbrains-detect-", ".txt")
-                val detectCommand = buildDetectScript(tempFile)
-
-                TerminalCommandRunner.run(proj, "🔍 Detecting Agents", detectCommand)
-
-                DetectionResultsWatcher.watchForResults(proj, tempFile) { results ->
-                    val (enabled, total) = DetectionResultsWatcher.applyResults(results)
-                    DetectionResultsWatcher.showNotification(
-                        proj,
-                        "Found $enabled of $total CLI agents installed",
-                        NotificationType.INFORMATION,
-                    )
-                }
-            }
-        }
-        actions += SimpleRunAction("🤞 Update all CLI agents") {
-            project?.let { TerminalCommandRunner.run(it, "🤞 Update Agents", buildUpdateScript(activeAgents)) }
-        }
+        actions += buildSettingsSubmenu(e, activeAgents)
         actions += Separator.getInstance()
         actions += SimpleLabelAction("LLM Brains v${getPluginVersion()}")
         return actions.toTypedArray()
+    }
+
+    private fun buildSettingsSubmenu(e: AnActionEvent?, activeAgents: List<CodingAgent>): AnAction {
+        val project = e?.project
+        val submenu = DefaultActionGroup("⚙️ Settings", true)
+        submenu.templatePresentation.description = "Manage LLM Brains agents."
+        // Settings | LLM Brains
+        submenu.add(
+            SimpleRunAction("🤌 Enable/Disable agents") {
+                ShowSettingsUtil.getInstance().showSettingsDialog(project, "LLM Brains")
+            },
+        )
+        submenu.add(
+            SimpleRunAction("🤔 Check all CLI versions") {
+                project?.let { TerminalCommandRunner.run(it, "🤔 Check Agents", buildCheckScript()) }
+            },
+        )
+        submenu.add(
+            SimpleRunAction("🔍 Auto-detect installed agents") {
+                project?.let { proj ->
+                    val tempFile = Files.createTempFile("llmbrains-detect-", ".txt")
+                    val detectCommand = buildDetectScript(tempFile)
+
+                    TerminalCommandRunner.run(proj, "🔍 Detecting Agents", detectCommand)
+
+                    DetectionResultsWatcher.watchForResults(proj, tempFile) { results ->
+                        val (enabled, total) = DetectionResultsWatcher.applyResults(results)
+                        DetectionResultsWatcher.showNotification(
+                            proj,
+                            "Found $enabled of $total CLI agents installed",
+                            NotificationType.INFORMATION,
+                        )
+                    }
+                }
+            },
+        )
+        submenu.add(
+            SimpleRunAction("🤞 Update all CLI agents") {
+                project?.let { TerminalCommandRunner.run(it, "🤞 Update Agents", buildUpdateScript(activeAgents)) }
+            },
+        )
+        return submenu
     }
 
     private fun buildCheckScript(): String {

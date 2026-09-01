@@ -87,8 +87,11 @@ Lines starting with `#` and blank lines are ignored. The extra args are appended
 Click the 🫴 icon in the top right corner of the IDE to access:
 
 - **Agent actions** - Launch any enabled agent in a new terminal tab
-- **Check what's installed** - Shows version info for all agents (or install hints for missing ones)
-- **Update all agents** - Updates all enabled agents to their latest versions
+- **⚙️ Settings** submenu:
+  - **Enable/Disable agents** - Opens Settings > Tools > LLM Brains
+  - **Check all CLI versions** - Shows version info for all agents (or install hints for missing ones)
+  - **Auto-detect installed agents** - Enables every agent whose CLI is found on your PATH
+  - **Update all CLI agents** - Updates all enabled agents to their latest versions
 
 ## Installation
 

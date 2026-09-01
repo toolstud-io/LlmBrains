@@ -1,3 +1,4 @@
+- `0.6.1`: moved settings/maintenance actions (enable/disable, check, auto-detect, update) into a ⚙️ Settings submenu
 - `0.6.0`: agent variants — multiple Claude entries (Fable/Opus/Sonnet presets) and custom per-agent variants with extra CLI parameters
 - `0.5.6`: replaced internal PluginManagerCore API with public PluginManager API (Marketplace verifier warning)
 - `0.5.5`: added Antigravity CLI (Gemini CLI successor); marked Gemini CLI as enterprise-only; fixed "update all" running the wrong command on Windows and with pipe-containing install hints

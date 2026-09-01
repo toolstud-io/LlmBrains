@@ -15,6 +15,9 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
         var customAgentName: String = "",
         var customAgentCommand: String = "",
         var customAgentUrl: String = "",
+        var activeVariantIds: MutableList<String> = mutableListOf(),
+        var inactiveVariantIds: MutableList<String> = mutableListOf(),
+        var customVariantLines: String = "",
     )
 
     private var state: State = State()
@@ -40,6 +43,27 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
     }
 
     fun activeAgents(): List<CodingAgent> = CodingAgents.all.filter { isAgentActive(it.id) }
+
+    fun isVariantActive(variant: AgentVariant): Boolean = when {
+        variant.id in state.activeVariantIds -> true
+        variant.id in state.inactiveVariantIds -> false
+        else -> variant.defaultEnabled
+    }
+
+    /** Only stores an override when the choice differs from the variant's default. */
+    fun setVariantActive(variant: AgentVariant, active: Boolean) {
+        state.activeVariantIds.remove(variant.id)
+        state.inactiveVariantIds.remove(variant.id)
+        if (active != variant.defaultEnabled) {
+            if (active) state.activeVariantIds.add(variant.id) else state.inactiveVariantIds.add(variant.id)
+        }
+    }
+
+    fun customVariants(): List<AgentVariant> = CustomVariantParser.parse(state.customVariantLines)
+
+    fun activeVariantsFor(agentId: String): List<AgentVariant> =
+        CodingAgents.presetVariantsFor(agentId).filter { isVariantActive(it) } +
+            customVariants().filter { it.agentId == agentId }
 
     fun getCustomAgent(): CodingAgent? {
         if (!state.customAgentEnabled || state.customAgentName.isBlank() || state.customAgentCommand.isBlank()) {

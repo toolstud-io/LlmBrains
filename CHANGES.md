@@ -1,3 +1,4 @@
+- `0.6.0`: agent variants — multiple Claude entries (Fable/Opus/Sonnet presets) and custom per-agent variants with extra CLI parameters
 - `0.5.6`: replaced internal PluginManagerCore API with public PluginManager API (Marketplace verifier warning)
 - `0.5.5`: added Antigravity CLI (Gemini CLI successor); marked Gemini CLI as enterprise-only; fixed "update all" running the wrong command on Windows and with pipe-containing install hints
 - `0.5.4`: support for 2026.2 versions of IDE

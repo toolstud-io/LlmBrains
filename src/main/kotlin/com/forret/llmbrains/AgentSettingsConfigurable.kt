@@ -8,18 +8,30 @@ import com.intellij.ui.components.labels.LinkLabel
 import com.intellij.ui.components.labels.LinkListener
 import java.awt.BorderLayout
 import java.awt.Component
+import java.awt.Dimension
 import java.net.URI
 import javax.swing.Box
 import javax.swing.BoxLayout
 import javax.swing.JComponent
 import javax.swing.JPanel
 import javax.swing.JSeparator
+import com.intellij.ui.components.JBScrollPane
+import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.components.JBTextField
 
 class AgentSettingsConfigurable : Configurable {
     private val checkboxes: Map<String, JBCheckBox> = CodingAgents.all.associate { agent ->
         agent.id to JBCheckBox(agent.name)
     }
+
+    // Preset variant checkboxes (indented under their parent agent)
+    private val variantCheckboxes: Map<String, JBCheckBox> = CodingAgents.presetVariants.associate { variant ->
+        val command = CodingAgents.findById(variant.agentId)?.let { variant.commandFor(it) } ?: variant.extraArgs
+        variant.id to JBCheckBox("${variant.label}  —  $command")
+    }
+
+    // Custom variants: one per line, "Label | extra args" or "agent-id | Label | extra args"
+    private val customVariantsArea = JBTextArea(5, 60)
 
     // Custom agent form fields
     private val customEnabledCheckbox = JBCheckBox("Enable custom agent")
@@ -46,7 +58,33 @@ class AgentSettingsConfigurable : Configurable {
                 row.add(link)
                 row.alignmentX = Component.LEFT_ALIGNMENT
                 content.add(row)
+
+                val variantBoxes = CodingAgents.presetVariantsFor(agent.id).map { variantCheckboxes[it.id]!! }
+                variantBoxes.forEach { variantBox ->
+                    val variantRow = JPanel()
+                    variantRow.layout = BoxLayout(variantRow, BoxLayout.X_AXIS)
+                    variantRow.add(Box.createHorizontalStrut(24))
+                    variantRow.add(variantBox)
+                    variantRow.alignmentX = Component.LEFT_ALIGNMENT
+                    content.add(variantRow)
+                }
+                if (variantBoxes.isNotEmpty()) {
+                    // Variants only show in the dropdown when the parent agent is enabled
+                    checkBox.addItemListener { variantBoxes.forEach { it.isEnabled = checkBox.isSelected } }
+                }
             }
+
+            // Custom variants section
+            content.add(Box.createVerticalStrut(16))
+            content.add(JSeparator())
+            content.add(Box.createVerticalStrut(8))
+            content.add(JBLabel("Custom variants — one per line: \"Label | extra args\" (Claude) or \"agent-id | Label | extra args\""))
+            content.add(JBLabel("Agent ids: ${CodingAgents.all.joinToString(", ") { it.id }}"))
+            content.add(Box.createVerticalStrut(4))
+            val customVariantsScroll = JBScrollPane(customVariantsArea)
+            customVariantsScroll.alignmentX = Component.LEFT_ALIGNMENT
+            customVariantsScroll.maximumSize = Dimension(Int.MAX_VALUE, 120)
+            content.add(customVariantsScroll)
 
             // Custom agent section
             content.add(Box.createVerticalStrut(16))
@@ -109,12 +147,16 @@ class AgentSettingsConfigurable : Configurable {
         val builtInModified = CodingAgents.all.any { agent ->
             checkboxes[agent.id]?.isSelected != settings.isAgentActive(agent.id)
         }
+        val variantsModified = CodingAgents.presetVariants.any { variant ->
+            variantCheckboxes[variant.id]?.isSelected != settings.isVariantActive(variant)
+        }
         val state = settings.getState()
+        val customVariantsModified = customVariantsArea.text != state.customVariantLines
         val customModified = customEnabledCheckbox.isSelected != state.customAgentEnabled ||
             customNameField.text != state.customAgentName ||
             customCommandField.text != state.customAgentCommand ||
             customUrlField.text != state.customAgentUrl
-        return builtInModified || customModified
+        return builtInModified || variantsModified || customVariantsModified || customModified
     }
 
     override fun apply() {
@@ -124,7 +166,13 @@ class AgentSettingsConfigurable : Configurable {
                 settings.setAgentActive(agent.id, checkBox.isSelected)
             }
         }
+        CodingAgents.presetVariants.forEach { variant ->
+            variantCheckboxes[variant.id]?.let { checkBox ->
+                settings.setVariantActive(variant, checkBox.isSelected)
+            }
+        }
         val state = settings.getState()
+        state.customVariantLines = customVariantsArea.text
         state.customAgentEnabled = customEnabledCheckbox.isSelected
         state.customAgentName = customNameField.text
         state.customAgentCommand = customCommandField.text
@@ -136,7 +184,14 @@ class AgentSettingsConfigurable : Configurable {
         CodingAgents.all.forEach { agent ->
             checkboxes[agent.id]?.isSelected = settings.isAgentActive(agent.id)
         }
+        CodingAgents.presetVariants.forEach { variant ->
+            variantCheckboxes[variant.id]?.let { checkBox ->
+                checkBox.isSelected = settings.isVariantActive(variant)
+                checkBox.isEnabled = settings.isAgentActive(variant.agentId)
+            }
+        }
         val state = settings.getState()
+        customVariantsArea.text = state.customVariantLines
         customEnabledCheckbox.isSelected = state.customAgentEnabled
         customNameField.text = state.customAgentName
         customCommandField.text = state.customAgentCommand

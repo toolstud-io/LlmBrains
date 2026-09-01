@@ -20,6 +20,7 @@
 - **One-click access** to CLI coding agents from the IDE toolbar (🫴 icon)
 - **14 built-in agents** with auto-detection of installed tools
 - **Custom agent support** - add your own CLI tool with configurable name, command, and URL
+- **Agent variants** - launch the same CLI with different parameters (e.g. Claude Fable / Sonnet / Opus)
 - **Check & Update utilities** to manage all agents at once
 - **Configurable** - enable/disable agents via Settings > Tools > LLM Brains
 - **Cross-platform** - works on macOS, Linux, and Windows
@@ -56,6 +57,31 @@ In addition to the built-in agents, you can configure your own custom CLI agent:
 
 Your custom agent will appear in the dropdown menu alongside the built-in agents.
 
+## Agent Variants
+
+A variant launches an existing agent with extra command-line parameters. Variants appear in the dropdown directly under their parent agent and only when that agent is enabled.
+
+**Built-in presets** (Claude Code, toggle them in **Settings > Tools > LLM Brains**):
+
+| Dropdown entry                      | Command                                        | Default |
+|-------------------------------------|------------------------------------------------|---------|
+| 🫴 Claude Fable                     | `claude --model fable`                         | on      |
+| 🫴 Claude Opus                      | `claude --model opus`                          | on      |
+| 🫴 Claude Sonnet                    | `claude --model sonnet`                        | on      |
+| 🫴 Claude Opus (skip permissions)   | `claude --model opus --dangerously-skip-permissions` | off |
+
+**Custom variants**: in the same settings page, add one line per variant in the *Custom variants* text area:
+
+```
+# Label | extra args            -> variant of Claude Code
+Opus max effort | --model opus --effort max
+Plan mode | --permission-mode plan
+# agent-id | Label | extra args -> variant of any built-in agent
+codex | Codex GPT-5 | --model gpt-5
+```
+
+Lines starting with `#` and blank lines are ignored. The extra args are appended verbatim to the agent command, so anything your shell accepts works.
+
 ## Usage
 
 Click the 🫴 icon in the top right corner of the IDE to access:
@@ -79,6 +105,7 @@ Go to **Settings/Preferences > Tools > LLM Brains** to:
 
 - Enable or disable specific built-in agents in the dropdown menu
 - Configure a custom agent with your own CLI tool
+- Enable presets and add custom variants (extra CLI parameters) per agent
 
 ## Requirements
 

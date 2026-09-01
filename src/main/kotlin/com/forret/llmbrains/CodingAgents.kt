@@ -14,6 +14,22 @@ data class CodingAgent(
     val dropdownLabel: String get() = "$HAND_EMOJI $name"
 }
 
+/**
+ * A launch option for an existing agent: same binary, extra command-line parameters.
+ * Presets have stable ids (persisted in settings); custom variants get synthetic ids.
+ */
+data class AgentVariant(
+    val id: String,
+    val agentId: String,
+    val label: String,
+    val extraArgs: String,
+    val defaultEnabled: Boolean = true,
+) {
+    val dropdownLabel: String get() = "$HAND_EMOJI $label"
+
+    fun commandFor(agent: CodingAgent): String = "${agent.command} $extraArgs".trim()
+}
+
 object CodingAgents {
     val all: List<CodingAgent> = listOf(
         CodingAgent(
@@ -138,5 +154,37 @@ object CodingAgents {
         ),
     )
 
+    val ids: Set<String> by lazy { all.map { it.id }.toSet() }
+
+    val presetVariants: List<AgentVariant> = listOf(
+        AgentVariant(
+            id = "claude-fable",
+            agentId = "claude",
+            label = "Claude Fable",
+            extraArgs = "--model fable",
+        ),
+        AgentVariant(
+            id = "claude-opus",
+            agentId = "claude",
+            label = "Claude Opus",
+            extraArgs = "--model opus",
+        ),
+        AgentVariant(
+            id = "claude-sonnet",
+            agentId = "claude",
+            label = "Claude Sonnet",
+            extraArgs = "--model sonnet",
+        ),
+        AgentVariant(
+            id = "claude-opus-skip-permissions",
+            agentId = "claude",
+            label = "Claude Opus (skip permissions)",
+            extraArgs = "--model opus --dangerously-skip-permissions",
+            defaultEnabled = false,
+        ),
+    )
+
     fun findById(id: String): CodingAgent? = all.firstOrNull { it.id == id }
+
+    fun presetVariantsFor(agentId: String): List<AgentVariant> = presetVariants.filter { it.agentId == agentId }
 }

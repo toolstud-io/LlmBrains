@@ -45,6 +45,9 @@ kotlin {
 dependencies {
     // Use IntelliJ Platform's Kotlin stdlib; don't bundle our own
     compileOnly(kotlin("stdlib"))
+    testImplementation(kotlin("stdlib"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
@@ -69,6 +72,18 @@ tasks {
 
     named("buildSearchableOptions") {
         enabled = false
+    }
+
+    test {
+        useJUnitPlatform()
+        // gradle-intellij-plugin 1.x crashes (IndexOutOfBoundsException in resolveIdeHomeVariable) while parsing the
+        // JVM args of IntelliJ 2025.1's product-info.json. Our tests are pure Kotlin and don't need the IDE runtime.
+        doFirst {
+            jvmArgumentProviders.clear()
+            systemProperties = systemProperties.filterKeys { !it.startsWith("idea.") && it != "java.system.class.loader" }
+            // The IDE's testFramework jar registers a JUnit 5 session listener that needs JUnit 4 and a running platform.
+            classpath = classpath.filter { !it.name.startsWith("testFramework") }
+        }
     }
 
     runIde {

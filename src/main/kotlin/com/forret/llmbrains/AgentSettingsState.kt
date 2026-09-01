@@ -1,10 +1,31 @@
 package com.forret.llmbrains
 
 import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.openapi.components.service
-import com.intellij.openapi.components.Service
+
+/**
+ * One row of the "Custom invocations" table, as persisted in LlmBrainsAgentSettings.xml.
+ * Mutable bean with defaults so the IntelliJ XML serializer can round-trip it.
+ */
+data class CustomVariantEntry(
+    var agentId: String = CustomVariantParser.DEFAULT_AGENT_ID,
+    var label: String = "",
+    var extraArgs: String = "",
+    var emoji: String = DEFAULT_VARIANT_EMOJI,
+) {
+    val isValid: Boolean get() = agentId.isNotBlank() && label.isNotBlank()
+
+    fun toVariant(index: Int): AgentVariant = AgentVariant(
+        id = "custom-variant:$agentId:$index",
+        agentId = agentId,
+        label = label.trim(),
+        extraArgs = extraArgs.trim(),
+        emoji = emoji,
+    )
+}
 
 @Service(Service.Level.APP)
 @State(name = "LlmBrainsAgentSettings", storages = [Storage("LlmBrainsAgentSettings.xml")])
@@ -15,8 +36,8 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
         var customAgentName: String = "",
         var customAgentCommand: String = "",
         var customAgentUrl: String = "",
-        var activeVariantIds: MutableList<String> = mutableListOf(),
-        var inactiveVariantIds: MutableList<String> = mutableListOf(),
+        var customVariants: MutableList<CustomVariantEntry> = mutableListOf(),
+        /** Legacy 0.6.x free-text format; migrated into [customVariants] on load. */
         var customVariantLines: String = "",
     )
 
@@ -26,6 +47,13 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
 
     override fun loadState(state: State) {
         this.state = state
+        migrateLegacyVariantLines()
+    }
+
+    private fun migrateLegacyVariantLines() {
+        if (state.customVariantLines.isBlank()) return
+        state.customVariants.addAll(CustomVariantParser.parse(state.customVariantLines))
+        state.customVariantLines = ""
     }
 
     fun isAgentActive(id: String): Boolean = id !in state.inactiveAgentIds
@@ -44,26 +72,10 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
 
     fun activeAgents(): List<CodingAgent> = CodingAgents.all.filter { isAgentActive(it.id) }
 
-    fun isVariantActive(variant: AgentVariant): Boolean = when {
-        variant.id in state.activeVariantIds -> true
-        variant.id in state.inactiveVariantIds -> false
-        else -> variant.defaultEnabled
-    }
+    fun customVariants(): List<AgentVariant> =
+        state.customVariants.mapIndexedNotNull { index, entry -> if (entry.isValid) entry.toVariant(index) else null }
 
-    /** Only stores an override when the choice differs from the variant's default. */
-    fun setVariantActive(variant: AgentVariant, active: Boolean) {
-        state.activeVariantIds.remove(variant.id)
-        state.inactiveVariantIds.remove(variant.id)
-        if (active != variant.defaultEnabled) {
-            if (active) state.activeVariantIds.add(variant.id) else state.inactiveVariantIds.add(variant.id)
-        }
-    }
-
-    fun customVariants(): List<AgentVariant> = CustomVariantParser.parse(state.customVariantLines)
-
-    fun activeVariantsFor(agentId: String): List<AgentVariant> =
-        CodingAgents.presetVariantsFor(agentId).filter { isVariantActive(it) } +
-            customVariants().filter { it.agentId == agentId }
+    fun variantsFor(agentId: String): List<AgentVariant> = customVariants().filter { it.agentId == agentId }
 
     fun getCustomAgent(): CodingAgent? {
         if (!state.customAgentEnabled || state.customAgentName.isBlank() || state.customAgentCommand.isBlank()) {

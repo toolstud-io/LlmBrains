@@ -23,10 +23,10 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             actions += SimpleRunAction(agent.dropdownLabel) {
                 project?.let { TerminalCommandRunner.run(it, "🫴 " + agent.name, agent.command) }
             }
-            // Variants: same binary with extra CLI parameters, listed right under their parent agent
-            settings.activeVariantsFor(agent.id).forEach { variant ->
+            // Custom invocations: same binary with extra CLI parameters, listed right under their parent agent
+            settings.variantsFor(agent.id).forEach { variant ->
                 actions += SimpleRunAction(variant.dropdownLabel) {
-                    project?.let { TerminalCommandRunner.run(it, "🫴 " + variant.label, variant.commandFor(agent)) }
+                    project?.let { TerminalCommandRunner.run(it, variant.tabTitle, variant.commandFor(agent)) }
                 }
             }
         }

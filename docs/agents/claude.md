@@ -300,23 +300,17 @@ Commands:
                                         available
 ```
 
-## Variants in LLM Brains
+## Custom invocations in LLM Brains
 
-LLM Brains ships preset variants for Claude Code — same `claude` binary, extra parameters — shown directly under **🫴 Claude Code** in the dropdown:
+Add your own launch options for Claude Code in **Settings > Tools > LLM Brains > Custom invocations** — same `claude` binary, extra parameters, own emoji — shown directly under **🫴 Claude Code** in the dropdown:
 
-| Dropdown entry                      | Command                                              | Default |
-|-------------------------------------|------------------------------------------------------|---------|
-| 🫴 Claude Fable                     | `claude --model fable`                               | on      |
-| 🫴 Claude Opus                      | `claude --model opus`                                | on      |
-| 🫴 Claude Sonnet                    | `claude --model sonnet`                              | on      |
-| 🫴 Claude Opus (skip permissions)   | `claude --model opus --dangerously-skip-permissions` | off     |
+| Agent    | Label                          | Extra args                                    | Emoji |
+|----------|--------------------------------|-----------------------------------------------|-------|
+| `claude` | Claude Fable                   | `--model fable`                               | 🔴    |
+| `claude` | Claude Opus                    | `--model opus`                                | 🟣    |
+| `claude` | Claude Sonnet                  | `--model sonnet`                              | 🟢    |
+| `claude` | Opus max effort                | `--model opus --effort max`                   | 🧠    |
+| `claude` | Plan mode                      | `--permission-mode plan`                      | 🔵    |
+| `claude` | Opus (skip permissions)        | `--model opus --dangerously-skip-permissions` | ⚡    |
 
-Toggle them in **Settings > Tools > LLM Brains**. Add your own in the *Custom variants* text area, one per line:
-
-```
-Opus max effort | --model opus --effort max
-Plan mode | --permission-mode plan
-Opus 4.6 | --model claude-opus-4-6
-```
-
-Useful flags: `--model <alias|full-name>`, `--effort low|medium|high|xhigh|max`, `--permission-mode acceptEdits|plan|auto|dontAsk|bypassPermissions`, `--dangerously-skip-permissions` (see `claude --help` above).
+Useful flags: `--model <fable|opus|sonnet|haiku|full-name>`, `--effort low|medium|high|xhigh|max`, `--permission-mode acceptEdits|plan|auto|dontAsk|bypassPermissions`, `--dangerously-skip-permissions` (see `claude --help` above).

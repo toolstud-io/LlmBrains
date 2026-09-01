@@ -1,6 +1,6 @@
 package com.forret.llmbrains
 
-private const val HAND_EMOJI = "🫴"
+internal const val HAND_EMOJI = "🫴"
 
 data class CodingAgent(
     val id: String,
@@ -10,25 +10,36 @@ data class CodingAgent(
     val installHint: String,
     val updateHint: String,
     val url: String,
+    /** One-line CLI syntax hint shown in the settings panel next to the custom invocations table. */
+    val variantHelp: String = "",
 ) {
     val dropdownLabel: String get() = "$HAND_EMOJI $name"
 }
 
 /**
- * A launch option for an existing agent: same binary, extra command-line parameters.
- * Presets have stable ids (persisted in settings); custom variants get synthetic ids.
+ * A custom invocation of an existing agent: same binary, extra command-line parameters,
+ * with its own emoji prefix so it can be told apart in the dropdown and the terminal tab title.
  */
 data class AgentVariant(
     val id: String,
     val agentId: String,
     val label: String,
     val extraArgs: String,
-    val defaultEnabled: Boolean = true,
+    val emoji: String = DEFAULT_VARIANT_EMOJI,
 ) {
-    val dropdownLabel: String get() = "$HAND_EMOJI $label"
+    private val prefix: String get() = emoji.trim().ifBlank { DEFAULT_VARIANT_EMOJI }
+
+    val dropdownLabel: String get() = "$prefix $label"
+
+    val tabTitle: String get() = dropdownLabel
 
     fun commandFor(agent: CodingAgent): String = "${agent.command} $extraArgs".trim()
 }
+
+const val DEFAULT_VARIANT_EMOJI = HAND_EMOJI
+
+/** Quick picks for the emoji column; any other emoji can be typed. */
+val SUGGESTED_VARIANT_EMOJIS: List<String> = listOf("🫴", "🔴", "🟠", "🟡", "🟢", "🔵", "🟣", "🧠", "⚡", "🚀", "🧪", "🛡️")
 
 object CodingAgents {
     val all: List<CodingAgent> = listOf(
@@ -55,6 +66,8 @@ object CodingAgents {
             installHint = "npm install -g @anthropic-ai/claude-code",
             updateHint = "npm update --quiet --no-fund -g @anthropic-ai/claude-code",
             url = "https://docs.claude.com/en/docs/claude-code/setup",
+            variantHelp = "claude --model <fable|opus|sonnet|haiku|full-name> --effort <low|medium|high|xhigh|max> " +
+                "--permission-mode <acceptEdits|plan|auto|dontAsk|bypassPermissions> [--dangerously-skip-permissions]",
         ),
         CodingAgent(
             id = "codex",
@@ -63,6 +76,8 @@ object CodingAgents {
             installHint = "npm install -g @openai/codex",
             updateHint = "npm update --quiet --no-fund -g @openai/codex",
             url = "https://developers.openai.com/codex/cli/",
+            variantHelp = "codex --model <name> --sandbox <read-only|workspace-write|danger-full-access> " +
+                "--ask-for-approval <untrusted|on-request|never> --profile <name> [--yolo]",
         ),
         CodingAgent(
             id = "copilot",
@@ -156,35 +171,8 @@ object CodingAgents {
 
     val ids: Set<String> by lazy { all.map { it.id }.toSet() }
 
-    val presetVariants: List<AgentVariant> = listOf(
-        AgentVariant(
-            id = "claude-fable",
-            agentId = "claude",
-            label = "Claude Fable",
-            extraArgs = "--model fable",
-        ),
-        AgentVariant(
-            id = "claude-opus",
-            agentId = "claude",
-            label = "Claude Opus",
-            extraArgs = "--model opus",
-        ),
-        AgentVariant(
-            id = "claude-sonnet",
-            agentId = "claude",
-            label = "Claude Sonnet",
-            extraArgs = "--model sonnet",
-        ),
-        AgentVariant(
-            id = "claude-opus-skip-permissions",
-            agentId = "claude",
-            label = "Claude Opus (skip permissions)",
-            extraArgs = "--model opus --dangerously-skip-permissions",
-            defaultEnabled = false,
-        ),
-    )
-
     fun findById(id: String): CodingAgent? = all.firstOrNull { it.id == id }
 
-    fun presetVariantsFor(agentId: String): List<AgentVariant> = presetVariants.filter { it.agentId == agentId }
+    /** Agents that document CLI flags worth turning into custom invocations. */
+    val withVariantHelp: List<CodingAgent> get() = all.filter { it.variantHelp.isNotBlank() }
 }

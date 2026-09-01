@@ -63,12 +63,12 @@ A custom invocation launches an existing agent with extra command-line parameter
 
 Add them in **Settings > Tools > LLM Brains > Custom invocations** — one table row per entry:
 
-| Agent    | Label                | Extra args                                 | Emoji |
-|----------|----------------------|--------------------------------------------|-------|
-| `claude` | Claude Fable         | `--model fable`                            | 🔴    |
-| `claude` | Claude Sonnet, plan  | `--model sonnet --permission-mode plan`    | 🟢    |
-| `claude` | Opus max effort      | `--model opus --effort max`                | 🧠    |
-| `codex`  | Codex full-auto      | `--sandbox workspace-write --ask-for-approval on-request` | 🟠 |
+| Icon | Label               | Agent    | Extra args                                                |
+|------|---------------------|----------|-----------------------------------------------------------|
+| 🔴    | Claude Fable        | `claude` | `--model fable`                                           |
+| 🟢    | Claude Sonnet, plan | `claude` | `--model sonnet --permission-mode plan`                   |
+| 🧠    | Opus max effort     | `claude` | `--model opus --effort max`                               |
+| 🟠    | Codex full-auto     | `codex`  | `--sandbox workspace-write --ask-for-approval on-request` |
 
 The extra args are appended verbatim to the agent command (`claude --model fable`), so anything your shell accepts works. Pick an emoji from the suggestions (🫴 🔴 🟠 🟡 🟢 🔵 🟣 🧠 ⚡ 🚀 …) or type any other one; the default is the standard 🫴.
 

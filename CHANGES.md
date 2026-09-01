@@ -1,4 +1,4 @@
-- `0.7.0`: custom invocations table replaces the hard-coded Claude presets — any agent + label + extra args + own emoji (menu entry and tab title); syntax help for Claude Code and Codex CLI
+- `0.7.0`: custom invocations table replaces the hard-coded Claude presets — columns Icon | Label | Agent | Extra args, one row per dropdown entry, own emoji for menu entry and tab title; syntax help for Claude Code and Codex CLI
 - `0.6.1`: moved settings/maintenance actions (enable/disable, check, auto-detect, update) into a ⚙️ Settings submenu
 - `0.6.0`: agent variants — multiple Claude entries (Fable/Opus/Sonnet presets) and custom per-agent variants with extra CLI parameters
 - `0.5.6`: replaced internal PluginManagerCore API with public PluginManager API (Marketplace verifier warning)

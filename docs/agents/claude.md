@@ -304,13 +304,13 @@ Commands:
 
 Add your own launch options for Claude Code in **Settings > Tools > LLM Brains > Custom invocations** — same `claude` binary, extra parameters, own emoji — shown directly under **🫴 Claude Code** in the dropdown:
 
-| Agent    | Label                          | Extra args                                    | Emoji |
-|----------|--------------------------------|-----------------------------------------------|-------|
-| `claude` | Claude Fable                   | `--model fable`                               | 🔴    |
-| `claude` | Claude Opus                    | `--model opus`                                | 🟣    |
-| `claude` | Claude Sonnet                  | `--model sonnet`                              | 🟢    |
-| `claude` | Opus max effort                | `--model opus --effort max`                   | 🧠    |
-| `claude` | Plan mode                      | `--permission-mode plan`                      | 🔵    |
-| `claude` | Opus (skip permissions)        | `--model opus --dangerously-skip-permissions` | ⚡    |
+| Icon | Label                   | Agent    | Extra args                                    |
+|------|-------------------------|----------|-----------------------------------------------|
+| 🔴    | Claude Fable            | `claude` | `--model fable`                               |
+| 🟣    | Claude Opus             | `claude` | `--model opus`                                |
+| 🟢    | Claude Sonnet           | `claude` | `--model sonnet`                              |
+| 🧠    | Opus max effort         | `claude` | `--model opus --effort max`                   |
+| 🔵    | Plan mode               | `claude` | `--permission-mode plan`                      |
+| ⚡    | Opus (skip permissions) | `claude` | `--model opus --dangerously-skip-permissions` |
 
 Useful flags: `--model <fable|opus|sonnet|haiku|full-name>`, `--effort low|medium|high|xhigh|max`, `--permission-mode acceptEdits|plan|auto|dontAsk|bypassPermissions`, `--dangerously-skip-permissions` (see `claude --help` above).

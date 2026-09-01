@@ -32,8 +32,8 @@ class AgentSettingsConfigurable : Configurable {
         agent.id to JBCheckBox(agent.name)
     }
 
-    // Custom invocations table: agent + label + extra args + emoji, one row per dropdown entry
-    private val variantsModel = ListTableModel<CustomVariantEntry>(AgentColumn, LabelColumn, ExtraArgsColumn, EmojiColumn)
+    // Custom invocations table: emoji + label + agent + extra args, one row per dropdown entry
+    private val variantsModel = ListTableModel<CustomVariantEntry>(EmojiColumn, LabelColumn, AgentColumn, ExtraArgsColumn)
     private val variantsTable = TableView(variantsModel).apply {
         setShowGrid(false)
         emptyText.text = "No custom invocations yet — click + to add one"
@@ -92,7 +92,7 @@ class AgentSettingsConfigurable : Configurable {
                     variantsModel.addRow(CustomVariantEntry())
                     val last = variantsModel.rowCount - 1
                     variantsTable.setRowSelectionInterval(last, last)
-                    variantsTable.editCellAt(last, 1)
+                    variantsTable.editCellAt(last, LABEL_COLUMN_INDEX)
                 }
                 .setRemoveAction {
                     TableUtil.stopEditing(variantsTable)
@@ -208,6 +208,11 @@ class AgentSettingsConfigurable : Configurable {
 
     override fun getDisplayName(): String = "LLM Brains"
 
+    companion object {
+        // Column focused for editing when a new row is added: Icon | Label | Agent | Extra args
+        private const val LABEL_COLUMN_INDEX = 1
+    }
+
     private abstract class TextColumn(name: String) : ColumnInfo<CustomVariantEntry, String>(name) {
         override fun isCellEditable(item: CustomVariantEntry): Boolean = true
     }
@@ -243,7 +248,7 @@ class AgentSettingsConfigurable : Configurable {
         }
     }
 
-    private object EmojiColumn : TextColumn("Emoji") {
+    private object EmojiColumn : TextColumn("Icon") {
         override fun valueOf(item: CustomVariantEntry): String = item.emoji
 
         override fun setValue(item: CustomVariantEntry, value: String) {

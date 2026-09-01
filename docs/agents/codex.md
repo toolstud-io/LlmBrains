@@ -104,11 +104,11 @@ Options:
 
 Add your own launch options for Codex in **Settings > Tools > LLM Brains > Custom invocations** — same `codex` binary, extra parameters, own emoji — shown directly under **🫴 Codex CLI** in the dropdown:
 
-| Agent   | Label              | Extra args                                                | Emoji |
-|---------|--------------------|-----------------------------------------------------------|-------|
-| `codex` | Codex read-only    | `--sandbox read-only`                                     | 🟢    |
-| `codex` | Codex full-auto    | `--sandbox workspace-write --ask-for-approval on-request` | 🟠    |
-| `codex` | Codex yolo         | `--dangerously-bypass-approvals-and-sandbox`              | ⚡    |
-| `codex` | Codex work profile | `--profile work`                                          | 🔵    |
+| Icon | Label              | Agent   | Extra args                                                |
+|------|--------------------|---------|-----------------------------------------------------------|
+| 🟢    | Codex read-only    | `codex` | `--sandbox read-only`                                     |
+| 🟠    | Codex full-auto    | `codex` | `--sandbox workspace-write --ask-for-approval on-request` |
+| ⚡    | Codex yolo         | `codex` | `--dangerously-bypass-approvals-and-sandbox`              |
+| 🔵    | Codex work profile | `codex` | `--profile work`                                          |
 
 Useful flags (see [developer commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli)): `--model <name>`, `--sandbox read-only|workspace-write|danger-full-access`, `--ask-for-approval untrusted|on-request|never`, `--profile <name>`, `--yolo` (alias of `--dangerously-bypass-approvals-and-sandbox`). `--full-auto` is deprecated in favour of `--sandbox workspace-write`.

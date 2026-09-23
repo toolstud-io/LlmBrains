@@ -1,4 +1,4 @@
-- `1.0.1`: fixed custom invocation icons being lost after an IDE restart (emoji are now persisted as code points; re-pick icons once after upgrading)
+- `1.0.2`: verified compatible with PhpStorm 2026.2.3 (build 262.10968.76) using the JetBrains Plugin Verifier (`./gradlew runPluginVerifier`); replaced the last internal API call (plugin version lookup); fixed custom invocation icons being lost after an IDE restart (emoji are now persisted as code points; re-pick icons once after upgrading)
 - `1.0.0`: first stable release 🎉 — custom invocations table, own emoji for menu entry and tab title; syntax help for Claude Code and Codex CLI
 - `0.6.1`: moved settings/maintenance actions (enable/disable, check, auto-detect, update) into a ⚙️ Settings submenu
 - `0.5.6`: replaced internal PluginManagerCore API with public PluginManager API (Marketplace verifier warning)

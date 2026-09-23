@@ -39,9 +39,9 @@ if [[ -n "${GRADLE_OPTS:-}" ]]; then
   CMD+=(-e "GRADLE_OPTS=${GRADLE_OPTS}")
 fi
 
-if [[ -n "${JAVA_TOOL_OPTIONS:-}" ]]; then
-  CMD+=(-e "JAVA_TOOL_OPTIONS=${JAVA_TOOL_OPTIONS}")
-fi
+# The container user has no passwd entry, so Java's user.home would be "?" (and tools like the plugin verifier
+# would create a "?" directory in the project). Point it at the mounted home cache instead.
+CMD+=(-e "JAVA_TOOL_OPTIONS=-Duser.home=/home/runner${JAVA_TOOL_OPTIONS:+ ${JAVA_TOOL_OPTIONS}}")
 
 CMD+=(-v "$GRADLE_CACHE_DIR":/gradle-cache)
 CMD+=(-v "$HOME_CACHE_DIR":/home/runner)

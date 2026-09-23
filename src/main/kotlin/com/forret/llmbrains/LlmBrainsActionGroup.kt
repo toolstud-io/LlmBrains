@@ -1,13 +1,11 @@
 package com.forret.llmbrains
 
-import com.intellij.ide.plugins.PluginManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.actionSystem.Separator
-import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.DumbAware
 import java.nio.file.Files
@@ -231,9 +229,23 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
         return value.replace("'", "''")
     }
 
-    private fun getPluginVersion(): String {
-        val plugin = PluginManager.getInstance().findEnabledPlugin(PluginId.getId("com.forret.llmbrains"))
-        return plugin?.version ?: "dev"
+    private fun getPluginVersion(): String = pluginVersion
+
+    private companion object {
+        private const val PLUGIN_ID = "com.forret.llmbrains"
+
+        /**
+         * Read the version from our own META-INF/plugin.xml (patched at build time) instead of the plugin
+         * manager API: every plugin-descriptor lookup in PluginManager/PluginManagerCore is @ApiStatus.Internal since 2026.x.
+         */
+        private val pluginVersion: String by lazy {
+            runCatching {
+                LlmBrainsActionGroup::class.java.classLoader.getResources("META-INF/plugin.xml").asSequence()
+                    .map { url -> url.openStream().bufferedReader().use { it.readText() } }
+                    .firstOrNull { it.contains("<id>$PLUGIN_ID</id>") }
+                    ?.let { Regex("<version>([^<]+)</version>").find(it)?.groupValues?.get(1)?.trim() }
+            }.getOrNull() ?: "dev"
+        }
     }
 
     private class SimpleRunAction(

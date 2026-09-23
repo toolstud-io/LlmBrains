@@ -86,6 +86,22 @@ tasks {
         }
     }
 
+    runPluginVerifier {
+        // Verify binary compatibility against real IDE builds. Override with e.g. -PverifierIdes=PS-262.10968.76,IC-2026.2.3
+        // or point at an installed IDE with -PverifierLocalIde=/path/to/ide (inside the Docker container).
+        // Keep downloaded IDEs in the (Docker-mounted) Gradle cache; the container has no home dir, so the default lands in "./?".
+        downloadDir.set(
+            providers.environmentVariable("GRADLE_USER_HOME").map { "$it/pluginVerifier/ides" }
+                .orElse(layout.buildDirectory.dir("pluginVerifier/ides").map { it.asFile.absolutePath })
+        )
+        val localIde = providers.gradleProperty("verifierLocalIde").orNull
+        if (localIde != null) {
+            localPaths.set(listOf(file(localIde)))
+        } else {
+            ideVersions.set(providers.gradleProperty("verifierIdes").orElse("PS-2026.2.3").map { it.split(",") })
+        }
+    }
+
     runIde {
         // Optionally point to a specific IDE install
         // ideDir.set(file("/Applications/PhpStorm.app/Contents"))

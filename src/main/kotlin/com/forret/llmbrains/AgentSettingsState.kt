@@ -5,15 +5,18 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.openapi.components.service
+import com.intellij.util.xmlb.annotations.OptionTag
 
 /**
  * One row of the "Custom invocations" table, as persisted in LlmBrainsAgentSettings.xml.
  * Mutable bean with defaults so the IntelliJ XML serializer can round-trip it.
+ * The emoji is stored as hex code points (see [EmojiCodePointConverter]) because the serializer drops non-BMP characters.
  */
 data class CustomVariantEntry(
     var agentId: String = CustomVariantParser.DEFAULT_AGENT_ID,
     var label: String = "",
     var extraArgs: String = "",
+    @OptionTag(converter = EmojiCodePointConverter::class)
     var emoji: String = DEFAULT_VARIANT_EMOJI,
 ) {
     val isValid: Boolean get() = agentId.isNotBlank() && label.isNotBlank()

@@ -58,7 +58,7 @@ tasks {
         untilBuild.set("262.*")
         pluginDescription.set(
             """
-            LLM Brains: open popular CLI coding agents (Claude, Codex, Gemini ...) in an IDE terminal.
+            LLM Brains: open popular CLI coding agents (Claude, Codex ...) in an IDE terminal.
             Adds a toolbar button (🫴) with options and a check to see what is installed.
             """.trimIndent()
         )

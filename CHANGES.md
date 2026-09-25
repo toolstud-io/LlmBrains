@@ -1,3 +1,4 @@
+- `1.0.3`: removed the "Custom Agent" settings section — use custom invocations instead (existing custom agent settings are ignored)
 - `1.0.2`: verified compatible with PhpStorm 2026.2.3 (build 262.10968.76) using the JetBrains Plugin Verifier (`./gradlew runPluginVerifier`); replaced the last internal API call (plugin version lookup); fixed custom invocation icons being lost after an IDE restart (emoji are now persisted as code points; re-pick icons once after upgrading)
 - `1.0.0`: first stable release 🎉 — custom invocations table, own emoji for menu entry and tab title; syntax help for Claude Code and Codex CLI
 - `0.6.1`: moved settings/maintenance actions (enable/disable, check, auto-detect, update) into a ⚙️ Settings submenu
@@ -6,6 +7,6 @@
 - `0.5.4`: support for 2026.2 versions of IDE
 - `0.5.3`: support for 2026.1 versions of IDE
 - `0.5.1`: auto-detect installed CLI coding agents
-- `0.5.0`: Added custom agent support: configure your own CLI tool with Name, Command, and URL
+- `0.5.0`: Added custom agent support: configure your own CLI tool with Name, Command, and URL (removed in 1.0.3)
 - `0.4.8`: Added Crush, VT Code agents
 - `0.4.6`: Added Grok, Droid, Warp CLI agents

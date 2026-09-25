@@ -29,19 +29,8 @@ class LlmBrainsActionGroup : ActionGroup("LLM Brains", "Open any CLI coding agen
             }
         }
 
-        // Add custom agent if enabled
-        val customAgent = settings.getCustomAgent()
-        if (customAgent != null) {
-            if (activeAgents.isNotEmpty()) {
-                actions += Separator.getInstance()
-            }
-            actions += SimpleRunAction(customAgent.dropdownLabel) {
-                project?.let { TerminalCommandRunner.run(it, "🫴 " + customAgent.name, customAgent.command) }
-            }
-        }
-
         // All settings/maintenance actions live in a single submenu
-        if (activeAgents.isNotEmpty() || customAgent != null) {
+        if (activeAgents.isNotEmpty()) {
             actions += Separator.getInstance()
         }
         actions += buildSettingsSubmenu(e, activeAgents)

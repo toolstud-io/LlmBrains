@@ -35,10 +35,6 @@ data class CustomVariantEntry(
 class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
     data class State(
         var inactiveAgentIds: MutableList<String> = mutableListOf(),
-        var customAgentEnabled: Boolean = false,
-        var customAgentName: String = "",
-        var customAgentCommand: String = "",
-        var customAgentUrl: String = "",
         var customVariants: MutableList<CustomVariantEntry> = mutableListOf(),
         /** Legacy 0.6.x free-text format; migrated into [customVariants] on load. */
         var customVariantLines: String = "",
@@ -79,21 +75,6 @@ class AgentSettingsState : PersistentStateComponent<AgentSettingsState.State> {
         state.customVariants.mapIndexedNotNull { index, entry -> if (entry.isValid) entry.toVariant(index) else null }
 
     fun variantsFor(agentId: String): List<AgentVariant> = customVariants().filter { it.agentId == agentId }
-
-    fun getCustomAgent(): CodingAgent? {
-        if (!state.customAgentEnabled || state.customAgentName.isBlank() || state.customAgentCommand.isBlank()) {
-            return null
-        }
-        return CodingAgent(
-            id = "custom",
-            name = state.customAgentName.trim(),
-            command = state.customAgentCommand.trim(),
-            versionArgs = "--version",
-            installHint = "",
-            updateHint = "",
-            url = state.customAgentUrl.trim().ifBlank { "https://example.com" },
-        )
-    }
 
     companion object {
         fun getInstance(): AgentSettingsState = service()

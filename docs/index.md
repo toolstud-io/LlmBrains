@@ -19,7 +19,6 @@
 
 - **One-click access** to CLI coding agents from the IDE toolbar (🫴 icon)
 - **14 built-in agents** with auto-detection of installed tools
-- **Custom agent support** - add your own CLI tool with configurable name, command, and URL
 - **Custom invocations** - launch the same CLI with different parameters and its own emoji (e.g. 🔴 Claude Fable, 🟢 Codex full-auto)
 - **Check & Update utilities** to manage all agents at once
 - **Configurable** - enable/disable agents via Settings > Tools > LLM Brains
@@ -43,19 +42,6 @@
 | [Qwen Code](https://qwenlm.github.io/qwen-code-docs/en/)                      | `qwen`     | Alibaba     | `npm install -g @qwen-code/qwen-code@latest`              |
 | [VT Code](https://github.com/vinhnx/vtcode)                                   | `vtcode`   | vinhnx      | `npm install -g @vinhnx/vtcode`                           |
 | [Warp CLI](https://docs.warp.dev/developers/cli)                              | `warp`     | Warp        | `brew install --cask warp-cli`                            |
-
-## Custom Agent
-
-In addition to the built-in agents, you can configure your own custom CLI agent:
-
-1. Go to **Settings/Preferences > Tools > LLM Brains**
-2. Enable the **Custom Agent** checkbox
-3. Configure:
-   - **Name**: Display name shown in the dropdown (e.g., "My Agent")
-   - **Command**: The CLI command to execute (e.g., `myagent`)
-   - **URL**: Documentation URL for reference
-
-Your custom agent will appear in the dropdown menu alongside the built-in agents.
 
 ## Custom Invocations
 
@@ -106,7 +92,6 @@ Or install from the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin
 Go to **Settings/Preferences > Tools > LLM Brains** to:
 
 - Enable or disable specific built-in agents in the dropdown menu
-- Configure a custom agent with your own CLI tool
 - Add custom invocations (extra CLI parameters + emoji) per agent
 
 ## Requirements

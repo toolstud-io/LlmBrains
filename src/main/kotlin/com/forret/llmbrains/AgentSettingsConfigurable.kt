@@ -7,7 +7,6 @@ import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.TableUtil
 import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.components.JBLabel
-import com.intellij.ui.components.JBTextField
 import com.intellij.ui.components.labels.LinkLabel
 import com.intellij.ui.components.labels.LinkListener
 import com.intellij.ui.table.TableView
@@ -38,12 +37,6 @@ class AgentSettingsConfigurable : Configurable {
         setShowGrid(false)
         emptyText.text = "No custom invocations yet — click + to add one"
     }
-
-    // Custom agent form fields
-    private val customEnabledCheckbox = JBCheckBox("Enable custom agent")
-    private val customNameField = JBTextField()
-    private val customCommandField = JBTextField()
-    private val customUrlField = JBTextField()
 
     private val panel: JComponent by lazy {
         JPanel(BorderLayout()).apply {
@@ -105,47 +98,6 @@ class AgentSettingsConfigurable : Configurable {
             tablePanel.maximumSize = Dimension(Int.MAX_VALUE, 240)
             content.add(tablePanel)
 
-            // Custom agent section
-            content.add(Box.createVerticalStrut(16))
-            content.add(JSeparator())
-            content.add(Box.createVerticalStrut(8))
-            content.add(JBLabel("Custom Agent"))
-            content.add(Box.createVerticalStrut(4))
-
-            // Enabled checkbox
-            customEnabledCheckbox.alignmentX = Component.LEFT_ALIGNMENT
-            content.add(customEnabledCheckbox)
-            content.add(Box.createVerticalStrut(4))
-
-            // Name row
-            val nameRow = JPanel()
-            nameRow.layout = BoxLayout(nameRow, BoxLayout.X_AXIS)
-            nameRow.add(JBLabel("Name: "))
-            nameRow.add(Box.createHorizontalStrut(4))
-            nameRow.add(customNameField)
-            nameRow.alignmentX = Component.LEFT_ALIGNMENT
-            content.add(nameRow)
-            content.add(Box.createVerticalStrut(4))
-
-            // Command row
-            val commandRow = JPanel()
-            commandRow.layout = BoxLayout(commandRow, BoxLayout.X_AXIS)
-            commandRow.add(JBLabel("Command: "))
-            commandRow.add(Box.createHorizontalStrut(4))
-            commandRow.add(customCommandField)
-            commandRow.alignmentX = Component.LEFT_ALIGNMENT
-            content.add(commandRow)
-            content.add(Box.createVerticalStrut(4))
-
-            // URL row
-            val urlRow = JPanel()
-            urlRow.layout = BoxLayout(urlRow, BoxLayout.X_AXIS)
-            urlRow.add(JBLabel("URL: "))
-            urlRow.add(Box.createHorizontalStrut(4))
-            urlRow.add(customUrlField)
-            urlRow.alignmentX = Component.LEFT_ALIGNMENT
-            content.add(urlRow)
-
             add(content, BorderLayout.NORTH)
         }
     }
@@ -170,11 +122,7 @@ class AgentSettingsConfigurable : Configurable {
         }
         val state = settings.getState()
         val variantsModified = editedVariants() != state.customVariants
-        val customModified = customEnabledCheckbox.isSelected != state.customAgentEnabled ||
-            customNameField.text != state.customAgentName ||
-            customCommandField.text != state.customAgentCommand ||
-            customUrlField.text != state.customAgentUrl
-        return builtInModified || variantsModified || customModified
+        return builtInModified || variantsModified
     }
 
     override fun apply() {
@@ -187,10 +135,6 @@ class AgentSettingsConfigurable : Configurable {
         }
         val state = settings.getState()
         state.customVariants = editedVariants().toMutableList()
-        state.customAgentEnabled = customEnabledCheckbox.isSelected
-        state.customAgentName = customNameField.text
-        state.customAgentCommand = customCommandField.text
-        state.customAgentUrl = customUrlField.text
     }
 
     override fun reset() {
@@ -200,10 +144,6 @@ class AgentSettingsConfigurable : Configurable {
         }
         val state = settings.getState()
         variantsModel.items = state.customVariants.map { it.copy() }
-        customEnabledCheckbox.isSelected = state.customAgentEnabled
-        customNameField.text = state.customAgentName
-        customCommandField.text = state.customAgentCommand
-        customUrlField.text = state.customAgentUrl
     }
 
     override fun getDisplayName(): String = "LLM Brains"

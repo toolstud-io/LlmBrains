@@ -1,3 +1,4 @@
+- `1.1.1`: support for 2026.3 versions of IDE; verified compatible with PhpStorm 2026.3 (build 263.7307.215) using the JetBrains Plugin Verifier
 - `1.0.3`: removed the "Custom Agent" settings section — use custom invocations instead (existing custom agent settings are ignored)
 - `1.0.2`: verified compatible with PhpStorm 2026.2.3 (build 262.10968.76) using the JetBrains Plugin Verifier (`./gradlew runPluginVerifier`); replaced the last internal API call (plugin version lookup); fixed custom invocation icons being lost after an IDE restart (emoji are now persisted as code points; re-pick icons once after upgrading)
 - `1.0.0`: first stable release 🎉 — custom invocations table, own emoji for menu entry and tab title; syntax help for Claude Code and Codex CLI

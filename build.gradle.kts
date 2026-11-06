@@ -54,8 +54,8 @@ tasks {
     patchPluginXml {
         // 251 corresponds to the 2025.1 release family; newer IDEs remain compatible without an explicit upper bound.
         sinceBuild.set("251")
-        // Support up to 2026.2 release family (262.*) for PhpStorm 2026.2 and other recent IDEs.
-        untilBuild.set("262.*")
+        // Support up to 2026.3 release family (263.*) for PhpStorm 2026.3 and other recent IDEs.
+        untilBuild.set("263.*")
         pluginDescription.set(
             """
             LLM Brains: open popular CLI coding agents (Claude, Codex ...) in an IDE terminal.
@@ -87,7 +87,7 @@ tasks {
     }
 
     runPluginVerifier {
-        // Verify binary compatibility against real IDE builds. Override with e.g. -PverifierIdes=PS-262.10968.76,IC-2026.2.3
+        // Verify binary compatibility against real IDE builds. Override with e.g. -PverifierIdes=PS-263.7307.215,IC-2026.3
         // or point at an installed IDE with -PverifierLocalIde=/path/to/ide (inside the Docker container).
         // Keep downloaded IDEs in the (Docker-mounted) Gradle cache; the container has no home dir, so the default lands in "./?".
         downloadDir.set(
@@ -98,7 +98,7 @@ tasks {
         if (localIde != null) {
             localPaths.set(listOf(file(localIde)))
         } else {
-            ideVersions.set(providers.gradleProperty("verifierIdes").orElse("PS-2026.2.3").map { it.split(",") })
+            ideVersions.set(providers.gradleProperty("verifierIdes").orElse("PS-2026.3").map { it.split(",") })
         }
     }
 
